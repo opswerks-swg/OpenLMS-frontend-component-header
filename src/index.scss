@@ -15,6 +15,7 @@ $nav-link-color: #374151;
 
 @import './Menu/menu.scss';
 @import './studio-header/StudioHeader.scss';
+@import './WelcomeBanner.scss';
 
 .dropdown-item a {
   text-decoration: none;
@@ -161,8 +162,9 @@ $nav-link-color: #374151;
     .nav-link:focus,
     .nav-link.active,
     .expanded .nav-link {
-      background: var(--pgn-color-bg-active, $component-active-bg);
-      color: var(--pgn-color-active, $component-active-color);
+      background: var(--pgn-color-success-100, $component-active-bg);
+      color: var(--pgn-color-success-600, $component-active-color);
+      font-weight: 700;
     }
 
     // Hide username label; keep avatar + caret visible.
@@ -219,8 +221,8 @@ $nav-link-color: #374151;
 
     .nav-link.active,
     .expanded .nav-link {
-      background: $nav-pill-active-bg;
-      color: $nav-pill-active-color;
+      background: $nav-pill-active-bg !important;
+      color: $nav-pill-active-color !important;
       font-weight: 700;
     }
 
@@ -300,12 +302,6 @@ $nav-link-color: #374151;
   }
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-
-.custom-header-container {
-  padding-left: 24px;
-  padding-right: 24px;
-}
 
 .custom-header-container .nav {
   flex-wrap: nowrap;
