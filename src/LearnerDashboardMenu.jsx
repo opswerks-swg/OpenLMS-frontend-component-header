@@ -78,6 +78,9 @@ const getLearnerHeaderMenu = (
         href: `${BASE_URL}/dashboard`,
         content: formatMessage(messages['header.links.courses']),
         isActive: getConfig().APP_ID === 'learner-dashboard',
+        onClick: getConfig().APP_ID === 'learner-dashboard'
+          ? (e) => e.preventDefault()
+          : undefined,
       },
       ...(getConfig().ENABLE_PROGRAMS ? [{
         type: 'item',
