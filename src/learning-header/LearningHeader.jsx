@@ -70,7 +70,7 @@ const LearningHeader = ({ showUserDropdown }) => {
                     <MenuTrigger
                       tag="button"
                       aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username: authenticatedUser.username })}
-                      className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
+                      className="btn d-inline-flex align-items-center pl-2 pr-3"
                     >
                       <DesktopUserMenuToggleSlot avatar={authenticatedUser.avatar} label={authenticatedUser.username} />
                     </MenuTrigger>

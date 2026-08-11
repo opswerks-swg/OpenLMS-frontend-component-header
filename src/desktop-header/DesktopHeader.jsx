@@ -18,6 +18,7 @@ import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 
 // i18n
 import messages from '../Header.messages';
+import { Container } from '@openedx/paragon';
 
 // Assets
 
@@ -44,7 +45,7 @@ const DesktopHeader = ({
       <MenuTrigger
         tag="button"
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
-        className="btn btn-outline-primary d-inline-flex align-items-center pl-2 pr-3"
+        className="d-inline-flex align-items-center bg-transparent border-0 p-0"
       >
         <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
       </MenuTrigger>
@@ -61,7 +62,7 @@ const DesktopHeader = ({
   return (
     <header className="site-header-desktop">
       <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
-      <div className={`container-fluid`}>
+      <Container fluid>
         <div className="custom-header-container">
           <div className="nav-container position-relative d-flex align-items-center">
             <LogoSlot {...logoProps} />
@@ -85,7 +86,7 @@ const DesktopHeader = ({
             </nav>
           </div>
         </div>
-      </div>
+      </Container>
     </header>
   );
 };
