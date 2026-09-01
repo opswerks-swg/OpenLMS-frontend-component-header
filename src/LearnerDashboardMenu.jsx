@@ -90,9 +90,9 @@ const getLearnerHeaderMenu = (
         href: `${BASE_URL}/dashboard/programs`,
         content: formatMessage(messages['header.links.programs']),
       }] : []),
-      ...(!getConfig().NON_BROWSABLE_COURSES && courseSearchUrl ? [{
+      ...(!getConfig().NON_BROWSABLE_COURSES ? [{
         type: 'item',
-        href: courseSearchUrl,
+        href: `${BASE_URL}/courses`,
         content: formatMessage(messages['header.links.content.search']),
         onClick: (e) => {
           if (exploreCoursesClick) { exploreCoursesClick(e); }
