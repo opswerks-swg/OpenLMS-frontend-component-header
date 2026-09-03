@@ -24,7 +24,6 @@ ensureConfig([
   'LOGIN_URL',
   'SITE_NAME',
   'LOGO_URL',
-  'ORDER_HISTORY_URL',
 ], 'Header component');
 
 subscribe(APP_CONFIG_INITIALIZED, () => {
