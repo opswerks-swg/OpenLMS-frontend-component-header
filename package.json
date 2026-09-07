@@ -53,7 +53,7 @@
     "ts-jest": "^29.4.4"
   },
   "dependencies": {
-    "@edx/frontend-plugin-notifications": "git+https://github.com/opswerks-swg/OpenLMS-frontend-plugin-notifications.git#cc71f62a207535e116778b0f66a1dfbfc4ecb37d",
+    "@edx/frontend-plugin-notifications": "git+https://github.com/opswerks-swg/OpenLMS-frontend-plugin-notifications.git",
     "@fortawesome/fontawesome-svg-core": "6.7.2",
     "@fortawesome/free-brands-svg-icons": "6.7.2",
     "@fortawesome/free-regular-svg-icons": "6.7.2",
