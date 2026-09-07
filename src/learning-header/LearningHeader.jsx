@@ -10,7 +10,7 @@ import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
 import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot';
 import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
 import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
-import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
 import getLearnerHeaderMenu from '../LearnerDashboardMenu';
 import messages from '../Header.messages';
 

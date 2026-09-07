@@ -6,7 +6,7 @@ import { getConfig } from '@edx/frontend-platform';
 // Local Components
 import DesktopUserMenuToggleSlot
   from '../plugin-slots/DesktopUserMenuToggleSlot';
-import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
 import LogoSlot from '../plugin-slots/LogoSlot';
 import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
 import { desktopLoggedOutItemsDataShape } from './DesktopLoggedOutItems';
