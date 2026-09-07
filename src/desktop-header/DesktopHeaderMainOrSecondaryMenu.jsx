@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
 import { CaretIcon } from '../Icons';
 
 const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {

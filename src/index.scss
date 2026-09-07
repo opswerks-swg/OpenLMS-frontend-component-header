@@ -17,6 +17,19 @@ $nav-link-color: #374151;
 @import './studio-header/StudioHeader.scss';
 @import './WelcomeBanner.scss';
 
+// Reserve scrollbar space so opening the notification drawer does not reflow header nav.
+html {
+  scrollbar-gutter: stable;
+}
+
+html.lw-scroll-locked {
+  overflow: hidden;
+}
+
+html.lw-scroll-locked body {
+  overflow: hidden;
+}
+
 .dropdown-item a {
   text-decoration: none;
 }
@@ -341,9 +354,8 @@ $nav-link-color: #374151;
   flex-wrap: nowrap;
 }
 
+// Bell padding for HeaderNotificationsSlot — matches LMS .secondary .lw-notification-btn.
+// Drawer styles come from frontend-plugin-notifications (import './notification.scss' in JS).
 .custom-header-container .lw-notification-btn {
-  border: 0;
-  background: none;
-  padding: 0;
   padding-right: 8px;
 }

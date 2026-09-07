@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "isolatedModules": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strict": false,
+    "target": "ES6",
+    "noEmit": false,
+    "declaration": false,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src/studio-header/**/*.ts",
+    "src/studio-header/**/*.tsx",
+    "src/plugin-slots/StudioHeaderActionsSlot/**/*.tsx"
+  ],
+  "exclude": [
+    "src/studio-header/**/*.test.ts",
+    "src/studio-header/**/*.test.tsx",
+    "src/plugin-slots/StudioHeaderActionsSlot/**/*.test.tsx"
+  ]
+}

@@ -5,7 +5,7 @@ import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
 import MobileUserMenuToggleSlot from '../plugin-slots/MobileUserMenuToggleSlot';
-import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
 import LogoSlot from '../plugin-slots/LogoSlot';
 import MobileLoggedOutItemsSlot from '../plugin-slots/MobileLoggedOutItemsSlot';
 import { mobileHeaderLoggedOutItemsDataShape } from './MobileLoggedOutItems';
@@ -13,6 +13,7 @@ import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot';
 import { mobileHeaderMainMenuDataShape } from './MobileHeaderMainMenu';
 import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot';
 import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
+import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot/index.js';
 
 // i18n
 import messages from '../Header.messages';
@@ -35,8 +36,7 @@ const MobileHeader = ({
 }) => {
   const intl = useIntl();
 
-  // LD / OpenLMS menus pass secondaryMenu as a React node (e.g. bell button),
-  // matching DesktopHeader. Only array items belong in the hamburger list.
+  // Only array secondaryMenu items belong in the hamburger list.
   const secondaryMenuItems = Array.isArray(secondaryMenu) ? secondaryMenu : [];
   const secondaryMenuNode = Array.isArray(secondaryMenu) ? null : secondaryMenu;
 
@@ -51,7 +51,8 @@ const MobileHeader = ({
   const logoProps = { src: logo, alt: logoAltText, href: logoDestination };
   const stickyClassName = stickyOnMobile ? 'sticky-top' : '';
   const logoClasses = getConfig().AUTHN_MINIMAL_HEADER ? 'justify-content-left pl-3' : 'justify-content-center';
-  const showAccountColumn = userMenu.length > 0 || loggedOutItems.length > 0 || secondaryMenuNode;
+  const showAccountColumn = userMenu.length > 0 || loggedOutItems.length > 0
+    || secondaryMenuNode || loggedIn;
 
   return (
     <header
@@ -87,6 +88,7 @@ const MobileHeader = ({
       {showAccountColumn ? (
         <div className="w-100 d-flex justify-content-end align-items-center">
           {secondaryMenuNode}
+          {loggedIn ? <HeaderNotificationsSlot /> : null}
           {(userMenu.length > 0 || loggedOutItems.length > 0) ? (
             <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
               <MenuTrigger
