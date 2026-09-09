@@ -1,7 +1,7 @@
 $spacer: 1rem;
 $white: #FFFFFF;
 
-.studio-header {
+#root .studio-header {
   position: relative;
   z-index: 1000;
 
@@ -13,13 +13,13 @@ $white: #FFFFFF;
     border-color: var(--pgn-color-white, $white);
   }
 
-  .logo {
+ .logo {
     display: block;
     box-sizing: content-box;
     position: relative;
     top: -.05em;
-    height: 1.75rem;
-    padding: var(--pgn-spacing-spacer-base, $spacer) 0;
+    height: 28px !important;
+    padding: var(--pgn-spacing-spacer-base, $spacer) 0 !important;
     margin-right: var(--pgn-spacing-spacer-base, $spacer);
 
     img {
@@ -37,9 +37,9 @@ $white: #FFFFFF;
       border-right: 1px solid #E5E5E5;
       width: 70%;
     }
-  
+
     span {
-      color: var(--pgn-color-gray-800, #333333);
+      color: var(--pgn-color-gray-800, #333333) !important;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
