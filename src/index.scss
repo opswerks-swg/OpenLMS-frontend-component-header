@@ -47,7 +47,7 @@ $nav-link-color: #374151;
   }
 }
 
-.learning-header {
+#root .learning-header {
   min-width: 0;
 
   .course-title-lockup {
@@ -62,27 +62,29 @@ $nav-link-color: #374151;
   }
 
   .user-dropdown .btn {
-    height: 3rem;
+    height: 3rem !important;
   }
 }
 
 // Learner variant: suppress link resizing the header, highlight active course link
-.learner-variant-header {
+#root .learner-variant-header {
   a {
     border-bottom: 2px solid transparent;
   }
 
+  .btn.btn-inverse-primary.course-link,
   .course-link {
     border-bottom: 2px solid !important;
   }
 
+  .btn.btn-inverse-primary.course-link:hover,
   .course-link:hover {
     border-bottom: inherit !important;
   }
 }
 
 // Small collapsed nav menu items
-.nav-small-menu {
+#root .nav-small-menu {
   >* {
     justify-content: flex-start !important;
     border-radius: 0 !important;
@@ -95,7 +97,7 @@ $nav-link-color: #374151;
   }
 }
 
-.site-header-mobile {
+#root header.site-header-mobile {
   position: relative;
   z-index: 1000;
   height: 3rem;
@@ -111,7 +113,7 @@ $nav-link-color: #374151;
 }
 
 
-.site-header-desktop {
+#root header.site-header-desktop {
   // Match LMS header.global-header (fixed on lg+); sticky keeps flow without body margin-top
   position: sticky;
   top: 0;
@@ -129,9 +131,9 @@ $nav-link-color: #374151;
     box-sizing: content-box;
     position: relative;
     top: -.05em;
-    height: 40px;
+    height: 28px !important;
     padding: var(--pgn-spacing-spacer-base, $spacer) 0;
-    margin-right: var(--pgn-spacing-spacer-base, $spacer);
+    margin-right: var(--pgn-spacing-spacer-base, $spacer) !important;
 
     img {
       display: block;
@@ -171,8 +173,8 @@ $nav-link-color: #374151;
     .nav-link:focus,
     .nav-link.active,
     .expanded .nav-link {
-      background: var(--pgn-color-success-100, $component-active-bg);
-      color: var(--pgn-color-success-600, $component-active-color);
+      background: var(--pgn-color-success-100, $component-active-bg) !important;
+      color: var(--pgn-color-success-600, $component-active-color) !important;
       font-weight: 700;
     }
 
@@ -201,18 +203,18 @@ $nav-link-color: #374151;
   }
 
   .main-nav {
-    .nav-link {
-      display: inline-flex;
+     .nav-link {
+      display: inline-flex !important;
       align-items: center;
       gap: 0.375rem;
-      padding: 5px 10px;
-      margin: 0.25rem 0.125rem;
+      padding: 5px 10px !important;
+      margin: 0.25rem 0.125rem !important;
       text-decoration: none;
       font-family: 'Rockford Sans', sans-serif;
       font-size: 0.9rem;
       font-weight: 500;
       letter-spacing: .01em;
-      color: $nav-link-color;
+      color: $nav-link-color !important;
       border-radius: $nav-pill-border-radius;
       transition: background 150ms ease, color 150ms ease;
     }
@@ -220,7 +222,7 @@ $nav-link-color: #374151;
     .nav-link:hover,
     .nav-link:focus {
       background: $nav-pill-hover-bg;
-      color: $nav-pill-hover-color;
+      color: $nav-pill-hover-color !important;
     }
 
     .nav-link:has(.lw-search-wrapper):hover {
