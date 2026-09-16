@@ -5,7 +5,6 @@ import {
   IconClockHour3,
   IconSearch,
   IconHelpHexagon,
-  IconBell,
 } from '@tabler/icons-react';
 import { getConfig } from '@edx/frontend-platform';
 
@@ -126,11 +125,7 @@ const getLearnerHeaderMenu = (
 
   return {
     mainMenu: [...mainMenu, ...searchItem],
-    secondaryMenu: (
-      <button className="lw-notification-btn" aria-label="Notifications">
-        <IconBell size={24} />
-      </button>
-    ),  
+    secondaryMenu: [],
     userMenu: [
       {
         heading: '',

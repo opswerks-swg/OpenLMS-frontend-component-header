@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
 
 const MobileHeaderMainMenu = ({ menu }) => {
   // Nodes are accepted as a prop
