@@ -8,4 +8,10 @@ export {
   LearningHeader, messages, StudioHeader, WelcomeBanner,
 };
 
+export {
+  buildTermsGateRedirectUrl,
+  enforceTermsGateBeforeAppRender,
+  isTermsMfeLocation,
+} from './termsGate/enforceTermsGate';
+
 export default Header;
