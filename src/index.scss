@@ -195,6 +195,13 @@ html.lw-scroll-locked body {
       font-weight: 700;
     }
 
+    // Indigo brand CSS (brand-theme-core) hides `.menu button .avatar` with
+    // !important, which left the account menu with no profile icon on deployed
+    // MFEs. Re-show it with higher specificity.
+    .menu button .avatar {
+      display: inline-flex !important;
+    }
+
     // Hide username label; keep avatar + caret visible.
     // font-size: 0 collapses the raw text node; child sizes are restored explicitly.
     .btn-outline-primary {
