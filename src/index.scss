@@ -12,6 +12,7 @@ $nav-pill-hover-bg: #D1FAE5;
 $nav-pill-hover-color: #059669;
 $nav-pill-border-radius: 8px;
 $nav-link-color: #374151;
+$profile-icon-color: #1E293B !default;
 
 @import './Menu/menu.scss';
 @import './studio-header/StudioHeader.scss';
@@ -140,7 +141,10 @@ html.lw-scroll-locked body {
   }
 
   .logo {
-    display: block;
+    // flex so the theme's light/dark logo <img> pair lays out as blocks
+    // whatever display the theme leaves on them
+    display: flex;
+    align-items: center;
     box-sizing: content-box;
     position: relative;
     top: -.05em;
@@ -148,8 +152,9 @@ html.lw-scroll-locked body {
     padding: var(--pgn-spacing-spacer-base, $spacer) 0;
     margin-right: var(--pgn-spacing-spacer-base, $spacer) !important;
 
+    // No display here: Indigo ThemedLogo renders .logo-image + .logo-image.logo-white
+    // and hides one per light/dark variant; forcing display would show both.
     img {
-      display: block;
       height: 100%;
     }
   }
@@ -189,6 +194,14 @@ html.lw-scroll-locked body {
       background: var(--pgn-color-success-100, $component-active-bg) !important;
       color: var(--pgn-color-success-600, $component-active-color) !important;
       font-weight: 700;
+    }
+
+    // Indigo brand CSS (brand-theme-core) hides `.menu button .avatar` with
+    // !important, which left the account menu with no profile icon on deployed
+    // MFEs. Re-show it with higher specificity.
+    .menu button .avatar {
+      display: inline-flex !important;
+      color: $profile-icon-color;
     }
 
     // Hide username label; keep avatar + caret visible.
