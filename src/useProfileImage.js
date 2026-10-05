@@ -12,8 +12,12 @@ import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
  *   GET {LMS_BASE_URL}/api/user/v1/accounts/{username}
  * which returns a `profile_image` object with `has_image` and several pre-sized image URLs.
  *
+ * Uses the full-size (500px) image, the same one the profile page shows: the welcome
+ * banner renders a 96px avatar, and the 50px "medium" image looked blurry upscaled
+ * (especially on 2x screens).
+ *
  * @param {string} username
- * @returns {string|null} the medium profile image URL, or null if the user has none
+ * @returns {string|null} the full-size profile image URL, or null if the user has none
  *   (or hasn't loaded yet) - callers should fall back to a default avatar in that case.
  */
 const useProfileImage = (username) => {
@@ -34,7 +38,9 @@ const useProfileImage = (username) => {
           return;
         }
         const profileImage = data?.profile_image;
-        setProfileImageUrl(profileImage?.has_image ? profileImage.image_url_medium : null);
+        setProfileImageUrl(profileImage?.has_image
+          ? (profileImage.image_url_full || profileImage.image_url_large || profileImage.image_url_medium)
+          : null);
       })
       .catch(() => {
         // Fail silently - the caller falls back to a default avatar.
