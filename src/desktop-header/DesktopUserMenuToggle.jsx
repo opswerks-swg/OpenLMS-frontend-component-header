@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CaretIcon } from '../Icons';
 import Avatar from '../Avatar';
 
 const DesktopUserMenuToggle = ({ avatar, label }) => (

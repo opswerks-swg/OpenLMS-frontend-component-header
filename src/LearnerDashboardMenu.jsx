@@ -10,6 +10,7 @@ import {
 import { getConfig } from '@edx/frontend-platform';
 
 import messages from './Header.messages';
+import { HelpIcon } from './Icons';
 
 // Icon map — allows HEADER_NAV_LINKS to reference icons by string name
 const ICON_MAP = {
@@ -24,7 +25,7 @@ const ICON_MAP = {
 // Icon + label rendered as direct children of .nav-link (matches LMS .lw-nav-item)
 const NavItem = ({ icon: IconComponent, label }) => (
   <>
-    <IconComponent size={18} className="lw-nav-icon" aria-hidden="true" />
+    <IconComponent size={24} stroke={1.33} className="lw-nav-icon" aria-hidden="true" />
     <span>{label}</span>
   </>
 );
@@ -127,7 +128,7 @@ const getLearnerHeaderMenu = (
     className: 'lw-search-item',
     content: (
       <div className="lw-search-wrapper">
-        <IconSearch size={16} className="lw-search-icon" />
+        <IconSearch size={24} stroke={1.33} className="lw-search-icon" aria-hidden="true" />
         <input
           className="lw-search-input"
           type="search"
@@ -151,7 +152,7 @@ const getLearnerHeaderMenu = (
     className: 'lw-help-menu',
     content: (
       <>
-        <IconHelpHexagon size={22} className="lw-help-icon" aria-hidden="true" />
+        <HelpIcon className="lw-help-icon" aria-hidden="true" focusable="false" />
         {/* Visually hidden on desktop (icon only); shown as text in the mobile menu */}
         <span className="lw-help-label">{formatMessage(messages['header.links.help'])}</span>
       </>

@@ -41,15 +41,15 @@ const DesktopHeader = ({
   const renderSecondaryMenu = () => <DesktopSecondaryMenuSlot menu={secondaryMenu} />;
 
   const renderUserMenu = () => (
-    <Menu transitionClassName="menu-dropdown" transitionTimeout={250}>
+    <Menu className="lw-user-menu" transitionClassName="menu-dropdown" transitionTimeout={250}>
       <MenuTrigger
         tag="button"
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
-        className="d-inline-flex align-items-center bg-transparent border-0 p-0"
+        className="lw-user-menu-toggle d-inline-flex align-items-center bg-transparent border-0"
       >
         <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
       </MenuTrigger>
-      <MenuContent className="mb-0 dropdown-menu show dropdown-menu-right pin-right shadow py-2">
+      <MenuContent className="lw-nav-dropdown-menu pin-right">
         <DesktopUserMenuSlot menu={userMenu} />
       </MenuContent>
     </Menu>
