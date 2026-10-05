@@ -10,12 +10,13 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
     return menu;
   }
 
-  return menu.map((menuItem) => {
+  return menu.map((menuItem, index) => {
     const {
       type,
       href,
       content,
       submenuContent,
+      className,
       disabled,
       isActive,
       onClick,
@@ -34,9 +35,18 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
       );
     }
 
+    // Without an href the trigger only opens the dropdown, so use a button to keep it keyboard-focusable.
+    const triggerProps = href
+      ? { tag: 'a', href }
+      : { tag: 'button', type: 'button', className: 'bg-transparent border-0' };
+
     return (
-      <Menu key={`${type}-${href}`} tag="div" className="nav-item" respondToPointerEvents>
-        <MenuTrigger onClick={onClick || null} tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
+      <Menu key={`${type}-${href ?? index}`} tag="div" className={`nav-item${className ? ` ${className}` : ''}`} respondToPointerEvents>
+        <MenuTrigger
+          onClick={onClick || null}
+          {...triggerProps}
+          className={`nav-link d-inline-flex align-items-center ${triggerProps.className || ''}`.trim()}
+        >
           {content} <CaretIcon role="img" aria-hidden focusable="false" />
         </MenuTrigger>
         <MenuContent className="pin-left pin-right shadow py-2">

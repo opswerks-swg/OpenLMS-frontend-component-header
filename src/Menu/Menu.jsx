@@ -92,6 +92,11 @@ class Menu extends React.Component {
     }
 
     e.preventDefault();
+    // A click right after a hover-open should keep the menu open, not toggle it shut.
+    if (this.state.expanded && this.openedByPointer) {
+      this.openedByPointer = false;
+      return;
+    }
     this.toggle();
   }
 
@@ -148,6 +153,7 @@ class Menu extends React.Component {
     if (!this.props.respondToPointerEvents) {
       return;
     }
+    this.openedByPointer = true;
     this.open();
   }
 
@@ -201,6 +207,7 @@ class Menu extends React.Component {
   }
 
   close() {
+    this.openedByPointer = false;
     if (this.props.onClose) {
       this.props.onClose();
     }

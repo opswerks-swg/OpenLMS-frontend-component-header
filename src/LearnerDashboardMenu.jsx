@@ -2,6 +2,7 @@ import React from 'react';
 import {
   IconHome,
   IconBook,
+  IconCompass,
   IconClockHour3,
   IconSearch,
   IconHelpHexagon,
@@ -13,6 +14,7 @@ import messages from './Header.messages';
 // Icon map — allows HEADER_NAV_LINKS to reference icons by string name
 const ICON_MAP = {
   Home: IconHome,
+  Compass: IconCompass,
   LibraryBooks: IconBook,
   ClockHour3: IconClockHour3,
   Search: IconSearch,
@@ -41,13 +43,18 @@ const getLearnerHeaderMenu = (
 
   // ─────────────────────────────────────────────────────────────────────────
   // Read nav links from MFE_CONFIG (set once in openlms_brand.py).
-  // Each entry: { title, url, icon? }
+  // Each entry: { title, url, icon? } or { title, icon?, children: [{ title, url }] }.
+  // HEADER_HELP_LINKS ([{ title, url }]) fills the help icon dropdown.
   // Falls back to the original hardcoded links if HEADER_NAV_LINKS is unset.
   // ─────────────────────────────────────────────────────────────────────────
   const configNavLinks = getConfig().HEADER_NAV_LINKS;
+  const configHelpLinks = getConfig().HEADER_HELP_LINKS;
 
   // /dashboard redirects into this MFE, so mark it active by APP_ID.
   const isLinkActive = (link) => {
+    if (!link.url) {
+      return false;
+    }
     if (link.url === '/dashboard' || link.url.endsWith('/dashboard')) {
       return getConfig().APP_ID === 'learner-dashboard';
     }
@@ -57,21 +64,36 @@ const getLearnerHeaderMenu = (
     return window.location.pathname === linkPath;
   };
 
+  // Entries with `children` render as a dropdown (e.g. Browse, Help).
+  const toSubmenu = (children) => children.map((child) => (
+    <a key={child.url} className="dropdown-item" href={toLmsUrl(child.url)}>
+      {child.title}
+    </a>
+  ));
+
   const mainMenu = configNavLinks
     ? configNavLinks.map((link) => {
+      const content = (
+        <NavItem
+          icon={ICON_MAP[link.icon] ?? IconHome}
+          label={link.title}
+        />
+      );
+      if (link.children?.length) {
+        return {
+          type: 'menu',
+          content,
+          submenuContent: toSubmenu(link.children),
+        };
+      }
       const active = isLinkActive(link);
       return {
         type: 'item',
-        href: link.url.startsWith('http') ? link.url : `${BASE_URL}${link.url}`,
+        href: toLmsUrl(link.url),
         isActive: active,
         // Skip navigation when already on this page (avoids /dashboard redirect flicker)
         onClick: active ? (e) => e.preventDefault() : undefined,
-        content: (
-          <NavItem
-            icon={ICON_MAP[link.icon] ?? IconHome}
-            label={link.title}
-          />
-        ),
+        content,
       };
     })
     : [
@@ -123,9 +145,23 @@ const getLearnerHeaderMenu = (
     ),
   }] : [];
 
+  // Help icon dropdown, rendered just before the notifications bell.
+  const helpMenu = configHelpLinks?.length ? [{
+    type: 'menu',
+    className: 'lw-help-menu',
+    content: (
+      <>
+        <IconHelpHexagon size={22} className="lw-help-icon" aria-hidden="true" />
+        {/* Visually hidden on desktop (icon only); shown as text in the mobile menu */}
+        <span className="lw-help-label">{formatMessage(messages['header.links.help'])}</span>
+      </>
+    ),
+    submenuContent: toSubmenu(configHelpLinks),
+  }] : [];
+
   return {
     mainMenu: [...mainMenu, ...searchItem],
-    secondaryMenu: [],
+    secondaryMenu: helpMenu,
     userMenu: [
       {
         heading: '',

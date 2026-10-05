@@ -250,17 +250,64 @@ html.lw-scroll-locked body {
       font-weight: 700;
     }
 
-    .menu {
-      position: static;
+    // HEADER_NAV_LINKS entries with children (e.g. Browse) drop down under their pill
+    .menu .menu-content {
+      right: auto;
+    }
+  }
 
-      .menu-content {
-        border-top: solid 2px var(--pgn-color-bg-active);
-        left: 0;
-        right: 0;
-        box-shadow: var(--pgn-elevation-box-shadow-down-1, 0 1px 2px rgba(0, 0, 0, .25));
-        border-bottom-left-radius: 2px;
-        border-bottom-right-radius: 2px;
-        padding: var(--pgn-spacing-spacer-base, $spacer);
+  // Help icon dropdown next to the notifications bell
+  .lw-help-menu {
+    .nav-link {
+      gap: 0.25rem;
+      padding: 0.375rem 0.5rem;
+      color: $nav-link-color;
+    }
+
+    .menu-content {
+      left: auto;
+    }
+
+    // Icon-only on desktop; label stays for screen readers
+    .lw-help-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+  }
+
+  .main-nav .menu .menu-content,
+  .lw-help-menu .menu-content {
+    min-width: 12rem;
+    margin-top: 0.25rem;
+
+    // Bridge the gap under the trigger so moving the pointer down keeps :hover
+    &::before {
+      content: '';
+      position: absolute;
+      top: -0.25rem;
+      left: 0;
+      right: 0;
+      height: 0.25rem;
+    }
+
+    border-radius: 0.5rem;
+    box-shadow: var(--pgn-elevation-box-shadow-down-2, 0 4px 12px rgba(0, 0, 0, .12));
+
+    .dropdown-item {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      color: $nav-link-color;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        background: $nav-pill-hover-bg;
+        color: $nav-pill-hover-color;
       }
     }
   }

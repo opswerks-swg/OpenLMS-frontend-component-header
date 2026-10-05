@@ -9,7 +9,7 @@ const MobileHeaderMainMenu = ({ menu }) => {
     return menu;
   }
 
-  return menu.map((menuItem) => {
+  return menu.map((menuItem, index) => {
     const {
       type,
       href,
@@ -23,7 +23,7 @@ const MobileHeaderMainMenu = ({ menu }) => {
     if (type === 'item') {
       return (
         <a
-          key={`${type}-${content}`}
+          key={`${type}-${href ?? index}`}
           className={`nav-link${disabled ? ' disabled' : ''}${isActive ? ' active' : ''}`}
           href={href}
           onClick={onClick || null}
@@ -34,8 +34,8 @@ const MobileHeaderMainMenu = ({ menu }) => {
     }
 
     return (
-      <Menu key={`${type}-${content}`} tag="div" className="nav-item">
-        <MenuTrigger onClick={onClick || null} tag="a" role="button" tabIndex="0" className="nav-link">
+      <Menu key={`${type}-${href ?? index}`} tag="div" className="nav-item">
+        <MenuTrigger onClick={onClick || null} tag="button" type="button" className="nav-link bg-transparent border-0 text-left w-100">
           {content}
         </MenuTrigger>
         <MenuContent className="position-static pin-left pin-right py-2">
