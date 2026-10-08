@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { AvatarIcon } from './Icons';
-import { IconUser } from '@tabler/icons-react';
+import { UserIcon } from './Icons';
 
 const Avatar = ({
   size,
@@ -10,8 +9,9 @@ const Avatar = ({
   alt,
   className,
 }) => {
-  const avatar = 
-    <IconUser style={{ width: size, height: size }} role="img" aria-hidden focusable="false" />
+  const avatar = (
+    <UserIcon style={{ width: size, height: size }} role="img" aria-hidden focusable="false" />
+  );
 
   return (
     <span

@@ -5,17 +5,37 @@ $component-active-bg: #0A3055FF !default;
 $component-active-color: $white !default;
 $rounded-pill: 50rem !default;
 
-// Learner dashboard nav pill styles
-$nav-pill-active-bg: #D1FAE5;
-$nav-pill-active-color: #059669;
-$nav-pill-hover-bg: #D1FAE5;
-$nav-pill-hover-color: #059669;
-$nav-pill-border-radius: 8px;
-$nav-link-color: #374151;
+// Header nav pills — OpenLMS Figma (Green new branding 100/500, Slate 800).
+// Mirrored by tutor-indigo lms/static/sass/extra/_header.scss.
+$nav-pill-active-bg: #D9EFE8;
+$nav-pill-active-color: #009368;
+$nav-pill-hover-bg: #D9EFE8;
+$nav-pill-hover-color: #009368;
+$nav-pill-border-radius: 6px;
+$nav-link-color: #1E293B;
+$header-font-family: 'Google Sans Flex', sans-serif;
+$header-height: 65px;
+$header-item-height: 40px;
+$profile-icon-color: #1E293B !default;
 
 @import './Menu/menu.scss';
 @import './studio-header/StudioHeader.scss';
 @import './WelcomeBanner.scss';
+
+// Whole header (nav pills, search, menus) uses Google Sans Flex, loaded by GoogleSansFlexFonts.
+// !important + every descendant: brand/LMS globals set Rockford on buttons and inputs.
+#root header.site-header-desktop,
+#root header.site-header-mobile {
+  // LMS pages render antialiased; without this the same colours (e.g. the search
+  // placeholder) look heavier and darker in MFEs on macOS.
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &,
+  *:not(.fa):not([class^="fa-"]):not([class*=" fa-"]) {
+    font-family: $header-font-family !important;
+  }
+}
 
 // Reserve scrollbar space so opening the notification drawer does not reflow header nav.
 html {
@@ -132,7 +152,7 @@ html.lw-scroll-locked body {
   top: 0;
   z-index: 1000;
   width: 100%;
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .04);
   background: var(--pgn-color-white, $white);
 
   .nav-link {
@@ -140,16 +160,21 @@ html.lw-scroll-locked body {
   }
 
   .logo {
-    display: block;
+    // flex so the theme's light/dark logo <img> pair lays out as blocks
+    // whatever display the theme leaves on them
+    display: flex;
+    align-items: center;
     box-sizing: content-box;
-    position: relative;
-    top: -.05em;
-    height: 28px !important;
-    padding: var(--pgn-spacing-spacer-base, $spacer) 0;
-    margin-right: var(--pgn-spacing-spacer-base, $spacer) !important;
+    // MFE App.scss wrappers set their own .logo offset (e.g. learning: top .1em)
+    top: 0;
+    height: 30px !important;
+    padding: 0;
+    // No gap here: the nav centres between logo and right group (Figma space-between)
+    margin-right: 0 !important;
 
+    // No display here: Indigo ThemedLogo renders .logo-image + .logo-image.logo-white
+    // and hides one per light/dark variant; forcing display would show both.
     img {
-      display: block;
       height: 100%;
     }
   }
@@ -158,6 +183,7 @@ html.lw-scroll-locked body {
   .nav-container {
     display: flex;
     align-items: center;
+    min-height: $header-height;
 
     .logo {
       flex: 0 0 auto;
@@ -168,13 +194,14 @@ html.lw-scroll-locked body {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 20px;
       min-width: 0;
     }
 
     .secondary-menu-container {
       flex: 0 0 auto;
       margin-left: auto;
+      gap: 12px;
     }
   }
 
@@ -182,13 +209,41 @@ html.lw-scroll-locked body {
 
   .secondary-menu-container {
 
+    // Hover/open keep the regular weight; only the colours change.
     .nav-link:hover,
     .nav-link:focus,
     .nav-link.active,
     .expanded .nav-link {
-      background: var(--pgn-color-success-100, $component-active-bg) !important;
-      color: var(--pgn-color-success-600, $component-active-color) !important;
-      font-weight: 700;
+      background: $nav-pill-hover-bg !important;
+      color: $nav-pill-hover-color !important;
+      font-weight: 400;
+    }
+
+    // Account menu toggle: 40px box around the 24px profile icon (Figma)
+    .lw-user-menu-toggle {
+      box-sizing: border-box;
+      justify-content: center;
+      width: $header-item-height;
+      height: $header-item-height;
+      padding: 8px;
+      border-radius: $nav-pill-border-radius;
+      // <button> trigger: don't rely on .bg-transparent to drop the UA ButtonFace fill
+      background: transparent;
+      color: $profile-icon-color;
+      transition: background 150ms ease;
+
+      &:hover,
+      &:focus-visible {
+        background: $nav-pill-hover-bg;
+      }
+    }
+
+    // Indigo brand CSS (brand-theme-core) hides `.menu button .avatar` with
+    // !important, which left the account menu with no profile icon on deployed
+    // MFEs. Re-show it with higher specificity.
+    .menu button .avatar {
+      display: inline-flex !important;
+      color: $profile-icon-color;
     }
 
     // Hide username label; keep avatar + caret visible.
@@ -216,17 +271,20 @@ html.lw-scroll-locked body {
   }
 
   .main-nav {
-     .nav-link {
+    .nav-link {
       display: inline-flex !important;
       align-items: center;
-      gap: 0.375rem;
-      padding: 5px 10px !important;
-      margin: 0.25rem 0.125rem !important;
+      box-sizing: border-box;
+      gap: 8px;
+      height: $header-item-height;
+      padding: 8px 12px !important;
+      margin: 0 !important;
+      background: transparent;
       text-decoration: none;
-      font-family: 'Rockford Sans', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: .01em;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: 0;
       color: $nav-link-color !important;
       border-radius: $nav-pill-border-radius;
       transition: background 150ms ease, color 150ms ease;
@@ -238,30 +296,104 @@ html.lw-scroll-locked body {
       color: $nav-pill-hover-color !important;
     }
 
-    .nav-link:has(.lw-search-wrapper):hover {
-      background: none;
-      color: inherit;
+    // Search is a mainMenu item: the box itself is the 40px control, so drop the pill chrome
+    .nav-link:has(.lw-search-wrapper) {
+      height: auto;
+      padding: 0 !important;
+
+      &:hover,
+      &:focus {
+        background: none;
+        color: inherit !important;
+      }
     }
 
     .nav-link.active,
     .expanded .nav-link {
       background: $nav-pill-active-bg !important;
       color: $nav-pill-active-color !important;
+    }
+
+    // Only the current page is bold; an open dropdown keeps the regular weight
+    .nav-link.active {
       font-weight: 700;
     }
 
-    .menu {
-      position: static;
+    // HEADER_NAV_LINKS entries with children (e.g. Browse) drop down under their pill
+    .menu .menu-content {
+      right: auto;
+    }
+  }
 
-      .menu-content {
-        border-top: solid 2px var(--pgn-color-bg-active);
-        left: 0;
-        right: 0;
-        box-shadow: var(--pgn-elevation-box-shadow-down-1, 0 1px 2px rgba(0, 0, 0, .25));
-        border-bottom-left-radius: 2px;
-        border-bottom-right-radius: 2px;
-        padding: var(--pgn-spacing-spacer-base, $spacer);
+  // Help icon dropdown next to the notifications bell
+  .lw-help-menu {
+    .nav-link {
+      box-sizing: border-box;
+      gap: 8px;
+      height: $header-item-height;
+      padding: 8px;
+      border-radius: $nav-pill-border-radius;
+      color: $nav-link-color;
+    }
+
+    .lw-help-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    // Right-align under the help icon
+    .menu-content {
+      left: auto;
+      right: 0;
+    }
+
+    // Icon-only on desktop; label stays for screen readers
+    .lw-help-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+  }
+
+  // Browse / Help / account dropdowns (Figma "Dropdown"): hug the labels, 4px inset, 6px radius
+  .main-nav .menu .menu-content,
+  .lw-help-menu .menu-content,
+  .lw-user-menu .menu-content {
+    width: max-content;
+    min-width: 118px;
+    padding: 4px;
+    margin-top: 0.25rem;
+    border-radius: $nav-pill-border-radius;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .25);
+
+    .dropdown-item {
+      display: block;
+      padding: 8px 12px;
+      border-radius: $nav-pill-border-radius;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      white-space: nowrap;
+      color: $nav-link-color;
+      text-decoration: none;
+
+      // No fill on hover; the label colour alone marks the row
+      &:hover,
+      &:focus,
+      &:active {
+        background: none;
+        color: $nav-pill-hover-color;
       }
+    }
+
+    // Account menu groups (e.g. Logout) sit in one list, like Browse and Help
+    .dropdown-divider,
+    .dropdown-header {
+      display: none;
     }
   }
 
@@ -270,10 +402,16 @@ html.lw-scroll-locked body {
   }
 }
 
-// ─── Nav icon (LMS .nav-tab a .lw-nav-icon) ───────────────────────────────────
+// ─── Nav icon + dropdown chevron (LMS .lw-nav-icon / .lw-nav-chevron) ─────────
 .lw-nav-icon {
-  width: 1rem;
-  height: 1rem;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.lw-nav-chevron {
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
 }
 
@@ -288,14 +426,12 @@ html.lw-scroll-locked body {
   width: 233px;
   height: 40px;
   padding: 8px 12px;
-  margin-right: 0.5rem;
   border-radius: 6px;
-  border: 1px solid #E2E8F0;
+  border: 0;
   background: #F8FAFC;
   transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
 
   &:focus-within {
-    border-color: #059669;
     background: #fff;
     box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
 
@@ -307,8 +443,8 @@ html.lw-scroll-locked body {
   .lw-search-icon {
     position: static;
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     color: #64748B;
     pointer-events: none;
   }
@@ -356,8 +492,13 @@ html.lw-scroll-locked body {
   flex-wrap: nowrap;
 }
 
-// Bell padding for HeaderNotificationsSlot — matches LMS .secondary .lw-notification-btn.
-// Drawer styles come from frontend-plugin-notifications (import './notification.scss' in JS).
+// Bell box for HeaderNotificationsSlot — 40px around the 24px icon, matches LMS
+// .secondary .lw-notification-btn. Drawer styles come from frontend-plugin-notifications.
 .custom-header-container .lw-notification-btn {
-  padding-right: 8px;
+  box-sizing: border-box;
+  justify-content: center;
+  width: $header-item-height;
+  height: $header-item-height;
+  padding: 8px;
+  border-radius: $nav-pill-border-radius;
 }

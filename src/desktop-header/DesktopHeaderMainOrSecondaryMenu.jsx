@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { IconChevronDown } from '@tabler/icons-react';
+
 import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
-import { CaretIcon } from '../Icons';
 
 const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
   // Nodes are accepted as a prop
@@ -10,12 +11,13 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
     return menu;
   }
 
-  return menu.map((menuItem) => {
+  return menu.map((menuItem, index) => {
     const {
       type,
       href,
       content,
       submenuContent,
+      className,
       disabled,
       isActive,
       onClick,
@@ -34,12 +36,22 @@ const DesktopHeaderMainOrSecondaryMenu = ({ menu }) => {
       );
     }
 
+    // Without an href the trigger only opens the dropdown, so use a button to keep it keyboard-focusable.
+    const triggerProps = href
+      ? { tag: 'a', href }
+      : { tag: 'button', type: 'button', className: 'bg-transparent border-0' };
+
     return (
-      <Menu key={`${type}-${href}`} tag="div" className="nav-item" respondToPointerEvents>
-        <MenuTrigger onClick={onClick || null} tag="a" className="nav-link d-inline-flex align-items-center" href={href}>
-          {content} <CaretIcon role="img" aria-hidden focusable="false" />
+      <Menu key={`${type}-${href ?? index}`} tag="div" className={`nav-item${className ? ` ${className}` : ''}`}>
+        <MenuTrigger
+          onClick={onClick || null}
+          {...triggerProps}
+          className={`nav-link d-inline-flex align-items-center ${triggerProps.className || ''}`.trim()}
+        >
+          {content}
+          <IconChevronDown size={12} stroke={2} className="lw-nav-chevron" aria-hidden="true" focusable="false" />
         </MenuTrigger>
-        <MenuContent className="pin-left pin-right shadow py-2">
+        <MenuContent className="lw-nav-dropdown-menu pin-left">
           {submenuContent}
         </MenuContent>
       </Menu>

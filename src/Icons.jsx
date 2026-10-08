@@ -29,6 +29,46 @@ export const AvatarIcon = (props) => (
   </svg>
 );
 
+// Profile icon (Tabler "user", 1.33 stroke) used by the account menu toggle.
+// Same path as the LMS navbar's header/user_dropdown.html (tutor-indigo).
+export const UserIcon = (props) => (
+  <svg
+    width="24px"
+    height="24px"
+    viewBox="0 0 24 24"
+    fill="none"
+    {...props}
+  >
+    <path
+      d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z"
+      stroke="currentColor"
+      strokeWidth="1.33"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+// Help menu icon (OpenLMS Figma, 1.33 stroke). Same paths as the LMS navbar's
+// header/navbar-authenticated.html HELP_SVG (tutor-indigo).
+export const HelpIcon = (props) => (
+  <svg
+    width="24px"
+    height="24px"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.33"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M19.875 6.27008C20.575 6.66808 21.005 7.41308 21 8.21808V15.5021C21 16.3111 20.557 17.0571 19.842 17.4501L13.092 21.7201C12.7574 21.9038 12.3818 22.0001 12 22.0001C11.6182 22.0001 11.2426 21.9038 10.908 21.7201L4.158 17.4501C3.80817 17.2589 3.51612 16.9772 3.31241 16.6346C3.1087 16.2919 3.0008 15.9007 3 15.5021V8.21708C3 7.40808 3.443 6.66308 4.158 6.27008L10.908 2.29008C11.2525 2.10011 11.6396 2.00049 12.033 2.00049C12.4264 2.00049 12.8135 2.10011 13.158 2.29008L19.908 6.27008H19.875Z" />
+    <path d="M12 16V16.01" />
+    <path d="M12 12.9998C12.4497 13.0011 12.8868 12.8508 13.2407 12.5732C13.5945 12.2956 13.8444 11.9068 13.95 11.4696C14.0557 11.0324 14.0109 10.5724 13.8229 10.1638C13.6349 9.75524 13.3147 9.42195 12.914 9.21776C12.5162 9.01397 12.0611 8.95079 11.6228 9.03848C11.1845 9.12618 10.7888 9.3596 10.5 9.70076" />
+  </svg>
+);
+
 export const CaretIcon = (props) => (
   <svg
     width="16px"

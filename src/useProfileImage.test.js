@@ -29,7 +29,28 @@ describe('useProfileImage', () => {
     expect(mockHttpClient.get).not.toHaveBeenCalled();
   });
 
-  it('fetches the account and returns the medium image url when the user has an image', async () => {
+  it('fetches the account and returns the full-size image url when the user has an image', async () => {
+    mockHttpClient.get.mockResolvedValueOnce({
+      data: {
+        profile_image: {
+          has_image: true,
+          image_url_full: 'http://localhost:18000/media/profile-images/full.jpg',
+          image_url_large: 'http://localhost:18000/media/profile-images/large.jpg',
+          image_url_medium: 'http://localhost:18000/media/profile-images/medium.jpg',
+        },
+      },
+    });
+
+    const { result } = renderHook(() => useProfileImage(username));
+
+    await waitFor(() => expect(result.current).toBe('http://localhost:18000/media/profile-images/full.jpg'));
+
+    expect(mockHttpClient.get).toHaveBeenCalledWith(
+      `http://localhost:18000/api/user/v1/accounts/${username}`,
+    );
+  });
+
+  it('falls back to a smaller image url when the full-size one is missing', async () => {
     mockHttpClient.get.mockResolvedValueOnce({
       data: {
         profile_image: {
@@ -42,10 +63,6 @@ describe('useProfileImage', () => {
     const { result } = renderHook(() => useProfileImage(username));
 
     await waitFor(() => expect(result.current).toBe('http://localhost:18000/media/profile-images/medium.jpg'));
-
-    expect(mockHttpClient.get).toHaveBeenCalledWith(
-      `http://localhost:18000/api/user/v1/accounts/${username}`,
-    );
   });
 
   it('returns null when the user has not uploaded an image', async () => {
