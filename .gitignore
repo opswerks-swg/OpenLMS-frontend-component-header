@@ -2,6 +2,7 @@
 .DS_Store
 coverage
 dist
+/plugin-slots
 node_modules
 temp
 src/i18n/transifex_input.json

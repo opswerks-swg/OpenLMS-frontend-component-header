@@ -4,16 +4,15 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
-import DesktopUserMenuToggleSlot
-  from '../plugin-slots/DesktopUserMenuToggleSlot';
+import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot/index';
 import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
-import LogoSlot from '../plugin-slots/LogoSlot';
-import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
+import LogoSlot from '../plugin-slots/LogoSlot/index';
+import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot/index';
 import { desktopLoggedOutItemsDataShape } from './DesktopLoggedOutItems';
-import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot';
+import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot/index';
 import { desktopHeaderMainOrSecondaryMenuDataShape } from './DesktopHeaderMainOrSecondaryMenu';
-import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
-import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
+import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot/index';
+import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot/index';
 import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 
 // i18n

@@ -175,7 +175,10 @@ html.lw-scroll-locked body {
     // No display here: Indigo ThemedLogo renders .logo-image + .logo-image.logo-white
     // and hides one per light/dark variant; forcing display would show both.
     img {
-      height: 100%;
+      height: 30px !important;
+      width: auto;
+      max-height: 30px;
+      min-height: 0;
     }
   }
 
@@ -225,16 +228,15 @@ html.lw-scroll-locked body {
       justify-content: center;
       width: $header-item-height;
       height: $header-item-height;
-      padding: 8px;
+      padding: 8px !important;
       border-radius: $nav-pill-border-radius;
-      // <button> trigger: don't rely on .bg-transparent to drop the UA ButtonFace fill
-      background: transparent;
-      color: $profile-icon-color;
+      background: transparent !important;
+      color: var(--pgn-color-text-base, $profile-icon-color);
       transition: background 150ms ease;
 
       &:hover,
       &:focus-visible {
-        background: $nav-pill-hover-bg;
+        background: $nav-pill-hover-bg !important;
       }
     }
 
@@ -271,6 +273,8 @@ html.lw-scroll-locked body {
   }
 
   .main-nav {
+    a.nav-link,
+    button.nav-link,
     .nav-link {
       display: inline-flex !important;
       align-items: center;
@@ -279,7 +283,8 @@ html.lw-scroll-locked body {
       height: $header-item-height;
       padding: 8px 12px !important;
       margin: 0 !important;
-      background: transparent;
+      background: transparent !important;
+      border-bottom: none !important;
       text-decoration: none;
       font-size: 14px;
       font-weight: 400;
@@ -290,10 +295,18 @@ html.lw-scroll-locked body {
       transition: background 150ms ease, color 150ms ease;
     }
 
+    a.nav-link:hover,
+    a.nav-link:focus,
+    a.nav-link:focus-visible,
+    button.nav-link:hover,
+    button.nav-link:focus,
+    button.nav-link:focus-visible,
     .nav-link:hover,
-    .nav-link:focus {
-      background: $nav-pill-hover-bg;
+    .nav-link:focus,
+    .nav-link:focus-visible {
+      background: $nav-pill-hover-bg !important;
       color: $nav-pill-hover-color !important;
+      border-bottom: none !important;
     }
 
     // Search is a mainMenu item: the box itself is the 40px control, so drop the pill chrome
@@ -302,8 +315,9 @@ html.lw-scroll-locked body {
       padding: 0 !important;
 
       &:hover,
-      &:focus {
-        background: none;
+      &:focus,
+      &:focus-visible {
+        background: none !important;
         color: inherit !important;
       }
     }
@@ -400,6 +414,29 @@ html.lw-scroll-locked body {
   .search-input {
     border-radius: var(--pgn-size-rounded-pill, $rounded-pill);
   }
+
+  // Dark: beat brand dark _extras.scss nav underline / .menu button fill; keep logo 30px
+  [data-paragon-theme-variant="dark"] &,
+  body.indigo-dark-theme & {
+    .logo img {
+      height: 30px !important;
+      width: auto;
+      max-height: 30px;
+      min-height: 0;
+    }
+
+    .main-nav {
+      a.nav-link,
+      button.nav-link,
+      .nav-link {
+        color: var(--pgn-color-text-base) !important;
+      }
+    }
+
+    .secondary-menu-container .lw-user-menu-toggle {
+      color: var(--pgn-color-text-base, $profile-icon-color);
+    }
+  }
 }
 
 // ─── Nav icon + dropdown chevron (LMS .lw-nav-icon / .lw-nav-chevron) ─────────
@@ -494,11 +531,24 @@ html.lw-scroll-locked body {
 
 // Bell box for HeaderNotificationsSlot — 40px around the 24px icon, matches LMS
 // .secondary .lw-notification-btn. Drawer styles come from frontend-plugin-notifications.
-.custom-header-container .lw-notification-btn {
+#root header.site-header-desktop .custom-header-container .lw-notification-btn {
   box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
   width: $header-item-height;
   height: $header-item-height;
-  padding: 8px;
+  padding: 8px !important;
+  border: 0;
   border-radius: $nav-pill-border-radius;
+  background: transparent !important;
+  transition: background 150ms ease;
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    background: $nav-pill-hover-bg !important;
+    box-shadow: none;
+    outline: none;
+  }
 }

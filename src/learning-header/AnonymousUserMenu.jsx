@@ -3,7 +3,7 @@ import React from 'react';
 import { getConfig } from '@edx/frontend-platform';
 import { getLoginRedirectUrl } from '@edx/frontend-platform/auth';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import LearningLoggedOutItemsSlot from '../plugin-slots/LearningLoggedOutItemsSlot';
+import LearningLoggedOutItemsSlot from '../plugin-slots/LearningLoggedOutItemsSlot/index';
 
 import genericMessages from '../generic/messages';
 

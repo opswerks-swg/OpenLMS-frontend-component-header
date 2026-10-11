@@ -11,7 +11,7 @@ import { configure as configureAuth, MockAuthService } from '@edx/frontend-platf
 import { render as rtlRender } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import AppProvider from '@edx/frontend-platform/react/AppProvider';
-import appMessages from './i18n';
+import appMessages from './i18n/index';
 
 // These configuration values are usually set in webpack's EnvironmentPlugin however
 // Jest does not use webpack so we need to set these so for testing

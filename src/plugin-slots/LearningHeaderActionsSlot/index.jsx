@@ -1,7 +1,7 @@
 import React from 'react';
 import { PluginSlot } from '@openedx/frontend-plugin-framework';
-import HeaderNotificationsSlot from '../HeaderNotificationsSlot';
-import LearningHelpSlot from '../LearningHelpSlot';
+import HeaderNotificationsSlot from '../HeaderNotificationsSlot/index';
+import LearningHelpSlot from '../LearningHelpSlot/index';
 
 const LearningHeaderActionsSlot = () => (
   <PluginSlot

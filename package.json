@@ -3,6 +3,12 @@
   "version": "1.0.0-semantically-released",
   "description": "The standard header for Open edX",
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/index": "./dist/index.scss",
+    "./dist/index.js": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
   "publishConfig": {
     "access": "public"
   },

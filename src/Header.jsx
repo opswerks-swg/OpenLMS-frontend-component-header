@@ -11,8 +11,8 @@ import {
 } from '@edx/frontend-platform';
 
 import PropTypes from 'prop-types';
-import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot';
-import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
+import DesktopHeaderSlot from './plugin-slots/DesktopHeaderSlot/index';
+import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot/index';
 
 import messages from './Header.messages';
 import getLearnerHeaderMenu from './LearnerDashboardMenu';
