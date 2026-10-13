@@ -166,6 +166,8 @@ const getLearnerHeaderMenu = (
     submenuContent: toSubmenu(configHelpLinks),
   }] : [];
 
+  const profileUrl = `${getConfig().ACCOUNT_PROFILE_URL}/u/${authenticatedUser?.username}`;
+
   return {
     mainMenu: [...mainMenu, ...searchItem],
     secondaryMenu: helpMenu,
@@ -175,8 +177,10 @@ const getLearnerHeaderMenu = (
         items: [
           {
             type: 'item',
-            href: `${getConfig().ACCOUNT_PROFILE_URL}/u/${authenticatedUser?.username}`,
+            href: profileUrl,
             content: formatMessage(messages['header.user.menu.profile']),
+            // The profile MFE has no APP_ID, so match on its path.
+            isActive: isLinkActive({ url: profileUrl }),
           },
           {
             type: 'item',

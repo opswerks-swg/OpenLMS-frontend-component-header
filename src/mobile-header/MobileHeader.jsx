@@ -17,6 +17,7 @@ import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot';
 
 // i18n
 import messages from '../Header.messages';
+import hasActiveMenuItem from '../utils/hasActiveMenuItem';
 
 // Assets
 import { MenuIcon } from '../Icons';
@@ -93,7 +94,7 @@ const MobileHeader = ({
             <Menu tag="nav" aria-label={intl.formatMessage(messages['header.label.secondary.nav'])} className="position-static">
               <MenuTrigger
                 tag="button"
-                className="icon-button"
+                className={`icon-button${hasActiveMenuItem(userMenu) ? ' active' : ''}`}
                 aria-label={intl.formatMessage(messages['header.label.account.menu'])}
                 title={intl.formatMessage(messages['header.label.account.menu'])}
               >

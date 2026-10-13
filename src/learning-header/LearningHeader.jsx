@@ -13,6 +13,7 @@ import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot
 import { Menu, MenuTrigger, MenuContent } from '../Menu';
 import getLearnerHeaderMenu from '../LearnerDashboardMenu';
 import messages from '../Header.messages';
+import hasActiveMenuItem from '../utils/hasActiveMenuItem';
 
 const LearningHeader = ({ showUserDropdown }) => {
   const intl = useIntl();
@@ -70,7 +71,7 @@ const LearningHeader = ({ showUserDropdown }) => {
                     <MenuTrigger
                       tag="button"
                       aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username: authenticatedUser.username })}
-                      className="btn d-inline-flex align-items-center pl-2 pr-3"
+                      className={`lw-user-menu-toggle d-inline-flex align-items-center bg-transparent border-0${hasActiveMenuItem(userMenu) ? ' active' : ''}`}
                     >
                       <DesktopUserMenuToggleSlot avatar={authenticatedUser.avatar} label={authenticatedUser.username} />
                     </MenuTrigger>

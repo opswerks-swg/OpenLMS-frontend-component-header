@@ -210,6 +210,7 @@ html.lw-scroll-locked body {
 
     &:hover,
     &:focus-visible,
+    &.active,
     &[aria-expanded="true"] {
       background: $nav-pill-hover-bg;
       color: $nav-pill-hover-color;
@@ -482,8 +483,11 @@ html.lw-scroll-locked body {
       color: var(--pgn-color-text-base, $profile-icon-color);
       transition: background 150ms ease;
 
+      // Open menu or on a user-menu page (e.g. profile) keeps the hover pill
       &:hover,
-      &:focus-visible {
+      &:focus-visible,
+      &.active,
+      &[aria-expanded="true"] {
         background: $nav-pill-hover-bg !important;
       }
     }
@@ -654,7 +658,8 @@ html.lw-scroll-locked body {
       // No fill on hover; the label colour alone marks the row
       &:hover,
       &:focus,
-      &:active {
+      &:active,
+      &.active {
         background: none;
         color: $nav-pill-hover-color;
       }
