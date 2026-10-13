@@ -4,13 +4,13 @@ import { getConfig } from '@edx/frontend-platform';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 
-import LogoSlot from '../plugin-slots/LogoSlot/index';
-import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot/index';
-import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot/index';
-import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot/index';
-import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot/index';
-import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot/index';
-import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
+import LogoSlot from '../plugin-slots/LogoSlot';
+import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot';
+import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
+import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot';
+import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
+import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
 import getLearnerHeaderMenu from '../LearnerDashboardMenu';
 import messages from '../Header.messages';
 

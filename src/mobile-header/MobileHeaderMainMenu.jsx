@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IconChevronDown } from '@tabler/icons-react';
 
-import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
 
 const MobileHeaderMainMenu = ({ menu }) => {
   // Nodes are accepted as a prop

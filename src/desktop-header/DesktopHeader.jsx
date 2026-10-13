@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { Container } from '@openedx/paragon';
 
-import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot/index';
-import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
-import LogoSlot from '../plugin-slots/LogoSlot/index';
-import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot/index';
+import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import LogoSlot from '../plugin-slots/LogoSlot';
+import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
 import { desktopLoggedOutItemsDataShape } from './DesktopLoggedOutItems';
-import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot/index';
+import DesktopMainMenuSlot from '../plugin-slots/DesktopMainMenuSlot';
 import { desktopHeaderMainOrSecondaryMenuDataShape } from './DesktopHeaderMainOrSecondaryMenu';
-import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot/index';
-import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot/index';
+import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
+import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
 import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
 import messages from '../Header.messages';
 

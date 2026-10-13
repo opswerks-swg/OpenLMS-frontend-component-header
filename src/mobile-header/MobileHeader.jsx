@@ -4,16 +4,16 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
 
 // Local Components
-import MobileUserMenuToggleSlot from '../plugin-slots/MobileUserMenuToggleSlot/index';
-import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
-import LogoSlot from '../plugin-slots/LogoSlot/index';
-import MobileLoggedOutItemsSlot from '../plugin-slots/MobileLoggedOutItemsSlot/index';
+import MobileUserMenuToggleSlot from '../plugin-slots/MobileUserMenuToggleSlot';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
+import LogoSlot from '../plugin-slots/LogoSlot';
+import MobileLoggedOutItemsSlot from '../plugin-slots/MobileLoggedOutItemsSlot';
 import { mobileHeaderLoggedOutItemsDataShape } from './MobileLoggedOutItems';
-import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot/index';
+import MobileMainMenuSlot from '../plugin-slots/MobileMainMenuSlot';
 import { mobileHeaderMainMenuDataShape } from './MobileHeaderMainMenu';
-import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot/index';
+import MobileUserMenuSlot from '../plugin-slots/MobileUserMenuSlot';
 import { mobileHeaderUserMenuDataShape } from './MobileHeaderUserMenu';
-import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot/index';
+import HeaderNotificationsSlot from '../plugin-slots/HeaderNotificationsSlot';
 
 // i18n
 import messages from '../Header.messages';

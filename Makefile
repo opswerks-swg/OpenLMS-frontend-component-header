@@ -15,8 +15,6 @@ build:
 	@# Babel copies TypeScript sources verbatim; compile them for dist consumers (MFE webpack).
 	@find dist/studio-header dist/plugin-slots/StudioHeaderActionsSlot -type f \( -name '*.ts' -o -name '*.tsx' \) -delete 2>/dev/null || true
 	./node_modules/.bin/tsc --project tsconfig.build.json
-	@# MFE webpack may resolve plugin-slots from package root (../../plugin-slots from dist/*-header).
-	@ln -sfn dist/plugin-slots plugin-slots
 
 requirements:
 	npm ci

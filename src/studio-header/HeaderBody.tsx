@@ -13,7 +13,7 @@ import CourseLockUp from './CourseLockUp';
 import UserMenu from './UserMenu';
 import BrandNav from './BrandNav';
 import NavDropdownMenu from './NavDropdownMenu';
-import StudioHeaderActionsSlot from '../plugin-slots/StudioHeaderActionsSlot/index';
+import StudioHeaderActionsSlot from '../plugin-slots/StudioHeaderActionsSlot';
 
 export interface HeaderBodyProps {
   studioBaseUrl: string;

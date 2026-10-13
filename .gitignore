@@ -2,7 +2,6 @@
 .DS_Store
 coverage
 dist
-/plugin-slots
 node_modules
 temp
 src/i18n/transifex_input.json
@@ -14,6 +13,5 @@ src/i18n/messages
 env.config.jsx
 
 ### Local Tutor dev (Personal-setup / dev.sh) — do not commit ###
-webpack.dev.config.js
 openlms-mfe-component-aliases.js
 *.bak.devsh

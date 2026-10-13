@@ -1,17 +1,12 @@
 {
-  "extends": "@edx/typescript-config",
-  "compilerOptions": {
-    "noEmit": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@plugin-slots/*": ["plugin-slots/*"],
-      "@desktop/*": ["desktop-header/*"],
-      "@mobile/*": ["mobile-header/*"],
-      "@learning/*": ["learning-header/*"],
-      "@studio/*": ["studio-header/*"],
-      "@utils/*": ["utils/*"]
-    }
-  },
-  "include": ["*.js", ".eslintrc.js", "src/**/*", "plugins/**/*"],
-  "exclude": ["dist", "node_modules"]
+    "extends": "@edx/typescript-config",
+    "compilerOptions": {
+      "noEmit": true,
+      "baseUrl": "./src",
+      "paths": {
+        "*": ["*"]
+      }
+    },
+    "include": ["*.js", ".eslintrc.js", "src/**/*", "plugins/**/*"],
+    "exclude": ["dist", "node_modules"]
 }

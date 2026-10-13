@@ -6,8 +6,8 @@ import { getConfig } from '@edx/frontend-platform';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { Dropdown } from '@openedx/paragon';
 
-import LearningUserMenuToggleSlot from '../plugin-slots/LearningUserMenuToggleSlot/index';
-import LearningUserMenuSlot from '../plugin-slots/LearningUserMenuSlot/index';
+import LearningUserMenuToggleSlot from '../plugin-slots/LearningUserMenuToggleSlot';
+import LearningUserMenuSlot from '../plugin-slots/LearningUserMenuSlot';
 
 import messages from './messages';
 

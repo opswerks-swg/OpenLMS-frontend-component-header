@@ -1,10 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "paths": {
-      "@plugin-slots/*": ["plugin-slots/*"],
-      "@studio/*": ["studio-header/*"]
-    },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
