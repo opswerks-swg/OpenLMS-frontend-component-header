@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   IconHome,
   IconBook,
@@ -29,6 +30,11 @@ const NavItem = ({ icon: IconComponent, label }) => (
     <span className="lw-nav-label" data-label={label}>{label}</span>
   </>
 );
+
+NavItem.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  label: PropTypes.string.isRequired,
+};
 
 const getLearnerHeaderMenu = (
   formatMessage,

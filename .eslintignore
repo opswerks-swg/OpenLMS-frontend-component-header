@@ -2,3 +2,5 @@ coverage
 dist
 example
 node_modules
+openlms-mfe-component-aliases.js
+webpack.dev.config.js.bak.devsh

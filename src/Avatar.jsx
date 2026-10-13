@@ -5,7 +5,6 @@ import { UserIcon } from './Icons';
 
 const Avatar = ({
   size,
-  src,
   alt,
   className,
 }) => {
@@ -17,6 +16,7 @@ const Avatar = ({
     <span
       style={{ height: size, width: size }}
       className={`avatar overflow-hidden d-inline-flex rounded-circle ${className}`}
+      aria-label={alt || undefined}
     >
       {avatar}
     </span>
@@ -24,14 +24,12 @@ const Avatar = ({
 };
 
 Avatar.propTypes = {
-  src: PropTypes.string,
   size: PropTypes.string,
   alt: PropTypes.string,
   className: PropTypes.string,
 };
 
 Avatar.defaultProps = {
-  src: null,
   size: '2rem',
   alt: null,
   className: null,

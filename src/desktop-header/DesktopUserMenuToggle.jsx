@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar';
 
 const DesktopUserMenuToggle = ({ avatar, label }) => (
-  <>
-    <Avatar size="24px" src={avatar} alt="" />
-  </>
+  <Avatar size="24px" src={avatar} alt={label || ''} />
 );
 
 export const DesktopUserMenuTogglePropTypes = {

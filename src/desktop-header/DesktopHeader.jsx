@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import { getConfig } from '@edx/frontend-platform';
+import { Container } from '@openedx/paragon';
 
-// Local Components
 import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot/index';
 import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
 import LogoSlot from '../plugin-slots/LogoSlot/index';
@@ -14,10 +13,7 @@ import { desktopHeaderMainOrSecondaryMenuDataShape } from './DesktopHeaderMainOr
 import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot/index';
 import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot/index';
 import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
-
-// i18n
 import messages from '../Header.messages';
-import { Container } from '@openedx/paragon';
 
 // Assets
 

@@ -19,6 +19,13 @@ const jestAliasRoots = {
   '@utils': path.join(srcRoot, 'utils'),
 };
 
+/** Jest: map MFE-style `.js` import paths to JSX/TS sources (fullySpecified in webpack, not on disk). */
+const jestMfeStyleImports = {
+  '^\\.\\./Menu/index\\.js$': path.join(srcRoot, 'Menu/index.jsx'),
+  '^\\./Menu\\.js$': path.join(srcRoot, 'Menu/Menu.jsx'),
+};
+
 module.exports = {
   jestAliasRoots,
+  jestMfeStyleImports,
 };
