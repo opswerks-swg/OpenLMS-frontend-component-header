@@ -5,18 +5,24 @@ $component-active-bg: #0A3055FF !default;
 $component-active-color: $white !default;
 $rounded-pill: 50rem !default;
 
-// Header nav pills — OpenLMS Figma (Green new branding 100/500, Slate 800).
-// Mirrored by tutor-indigo lms/static/sass/extra/_header.scss.
-$nav-pill-active-bg: #D9EFE8;
-$nav-pill-active-color: #009368;
-$nav-pill-hover-bg: #D9EFE8;
-$nav-pill-hover-color: #009368;
+// Header nav pills — OpenLMS prototype header (sampled from the live frame).
+// Mirrored by tutor-indigo lms/static/sass/extra/_header.scss — keep in sync:
+// pills #D9F9E7 / #43946C, 65/40 bar, 233px search, 1024 compact breakpoint,
+// Help bar toggle 8px pad, desktop grid 1fr auto 1fr (separate compile; no shared pkg).
+$nav-pill-active-bg: #D9F9E7;
+$nav-pill-active-color: #43946C;
+$nav-pill-hover-bg: $nav-pill-active-bg;
+$nav-pill-hover-color: $nav-pill-active-color;
 $nav-pill-border-radius: 6px;
 $nav-link-color: #1E293B;
 $header-font-family: 'Google Sans Flex', sans-serif;
 $header-height: 65px;
 $header-item-height: 40px;
 $profile-icon-color: #1E293B !default;
+$header-divider-color: #E2E8F0; // Slate 200
+$header-focus-ring: 0 0 0 3px rgba(5, 150, 105, .16); // same ring as the search box
+$header-search-width: 233px;
+$header-phone-max: 575.98px;
 
 @import './Menu/menu.scss';
 @import './studio-header/StudioHeader.scss';
@@ -130,18 +136,247 @@ html.lw-scroll-locked body {
   }
 }
 
+// ─── Compact header (< 1024px, Header.jsx DESKTOP_MIN_WIDTH) ─────────────────
+// Menu | logo | bell + account. Reuses the desktop pill, dropdown and search styles;
+// both menus open as a full-width panel under the bar.
 #root header.site-header-mobile {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  height: 3rem;
+  gap: 8px;
+  height: $header-height;
+  padding: 0 24px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .04);
+  background: var(--pgn-color-white, $white);
+
+  @media (max-width: $header-phone-max) {
+    padding: 0 12px;
+  }
+
+  // Equal side columns keep the logo centred; the logo column shrinks before they do.
+  .lw-mobile-header-start,
+  .lw-mobile-header-end {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .lw-mobile-header-end {
+    gap: 4px;
+  }
+
+  .lw-mobile-header-logo {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
 
   .nav-link {
     text-decoration: none;
     cursor: pointer;
   }
 
-  img {
-    height: 1.5rem;
+  // Same box as the desktop .logo; height steps down on phones.
+  .logo {
+    display: flex;
+    align-items: center;
+    height: 30px;
+
+    img {
+      height: 30px !important;
+      width: auto;
+      max-width: 100%;
+      max-height: 30px;
+      min-height: 0;
+      object-fit: contain;
+
+      @media (max-width: $header-phone-max) {
+        height: 26px !important;
+      }
+    }
+  }
+
+  // Hamburger and account toggles: 40px pills like the desktop icon buttons
+  .icon-button {
+    width: $header-item-height;
+    height: $header-item-height;
+    padding: 8px;
+    border-radius: $nav-pill-border-radius;
+    color: $nav-link-color;
+    transition: background 150ms ease, color 150ms ease;
+
+    // Mouse focus stays plain (global .icon-button greys it); open/hover/keyboard get the pill
+    &:focus {
+      background: transparent;
+    }
+
+    &:hover,
+    &:focus-visible,
+    &[aria-expanded="true"] {
+      background: $nav-pill-hover-bg;
+      color: $nav-pill-hover-color;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: $header-focus-ring;
+    }
+  }
+
+  // Brand CSS hides `.menu button .avatar` (see the desktop account toggle)
+  .menu button .avatar {
+    display: inline-flex !important;
+    color: currentColor;
+  }
+
+  // ─── Full-width panel under the bar (main menu and account menu) ──────────
+  .lw-mobile-menu-panel {
+    gap: 4px;
+    max-height: calc(100vh - #{$header-height});
+    max-height: calc(100dvh - #{$header-height});
+    overflow-y: auto;
+    padding: 12px 24px 16px;
+    margin: 0;
+    border-top: 1px solid $header-divider-color;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .08);
+    list-style: none;
+
+    @media (max-width: $header-phone-max) {
+      padding: 12px 12px 16px;
+    }
+
+    // Rows: desktop pill colours, 48px touch targets
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 48px;
+      padding: 0 12px;
+      border-radius: $nav-pill-border-radius;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: $nav-link-color;
+      transition: background 150ms ease, color 150ms ease;
+
+      &:hover,
+      &:focus-visible {
+        background: $nav-pill-hover-bg;
+        color: $nav-pill-hover-color;
+        outline: none;
+      }
+
+      &.active {
+        background: $nav-pill-active-bg;
+        color: $nav-pill-active-color;
+        font-weight: 700;
+      }
+    }
+
+    // Search goes first and spans the panel
+    .nav-link:has(.lw-search-wrapper) {
+      order: -1;
+      min-height: 0;
+      padding: 0;
+      margin-bottom: 8px;
+      cursor: default;
+
+      &:hover,
+      &:focus-visible {
+        background: none;
+      }
+
+      .lw-search-wrapper {
+        width: 100%;
+        height: 48px;
+      }
+
+      .lw-search-input,
+      .lw-search-input::placeholder {
+        font-size: 16px; // 16px stops iOS zooming on focus
+      }
+    }
+
+    // Dropdown entries (Browse, Help): chevron turns while open, links indent under the label
+    .nav-item {
+      width: 100%;
+
+      .lw-nav-chevron {
+        width: 16px;
+        height: 16px;
+        margin-left: auto;
+        transition: transform 150ms ease;
+      }
+
+      &.expanded {
+        > .nav-link {
+          background: $nav-pill-active-bg;
+          color: $nav-pill-active-color;
+        }
+
+        .lw-nav-chevron {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .lw-mobile-submenu {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      padding: 4px 0 4px 36px; // under the label, past the 24px icon + 12px gap
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 12px;
+        border-radius: $nav-pill-border-radius;
+        font-size: 15px;
+        line-height: 22px;
+        color: $nav-link-color;
+        text-decoration: none;
+        white-space: normal;
+
+        &:hover,
+        &:focus-visible {
+          background: none;
+          color: $nav-pill-hover-color;
+          outline: none;
+        }
+
+        &:focus-visible {
+          box-shadow: $header-focus-ring;
+        }
+      }
+    }
+
+    // Help (secondary menu) sits below the main links; label shown here, icon-only on desktop
+    .lw-help-menu {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid $header-divider-color;
+
+      .lw-help-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+    }
+
+    // Logged-out Sign in / Register buttons keep their Paragon look
+    .btn {
+      min-height: 44px;
+    }
+  }
+
+  [data-paragon-theme-variant="dark"] &,
+  body.indigo-dark-theme & {
+    .icon-button,
+    .lw-mobile-menu-panel .nav-link:not(.active),
+    .lw-mobile-submenu .dropdown-item {
+      color: var(--pgn-color-text-base);
+    }
   }
 }
 
@@ -154,6 +389,14 @@ html.lw-scroll-locked body {
   width: 100%;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .04);
   background: var(--pgn-color-white, $white);
+
+  // Brand theme (brand-theme-core.css) caps this at 1600px and loads after app CSS.
+  .container-fluid {
+    max-width: none !important;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .nav-link {
     text-decoration: none;
@@ -182,28 +425,33 @@ html.lw-scroll-locked body {
     }
   }
 
-  // ─── Same as LMS: logo shrink-0 | nav-links flex:1 + center | secondary auto ─
+  // Equal side columns centre the nav on the bar, matching the LMS header.
+  // !important beats Bootstrap .d-flex and .ml-auto on this same node, which
+  // otherwise pin the pills to the logo and leave Help on the right.
   .nav-container {
-    display: flex;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    gap: 24px;
     min-height: $header-height;
 
     .logo {
+      justify-self: start;
       flex: 0 0 auto;
     }
 
     .main-nav {
-      flex: 1;
+      justify-self: center;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 20px;
-      min-width: 0;
+      width: max-content;
     }
 
     .secondary-menu-container {
-      flex: 0 0 auto;
-      margin-left: auto;
+      justify-self: end;
+      margin-left: 0 !important;
       gap: 12px;
     }
   }
@@ -291,6 +539,7 @@ html.lw-scroll-locked body {
       line-height: 21px;
       letter-spacing: 0;
       color: $nav-link-color !important;
+      white-space: nowrap;
       border-radius: $nav-pill-border-radius;
       transition: background 150ms ease, color 150ms ease;
     }
@@ -311,8 +560,15 @@ html.lw-scroll-locked body {
 
     // Search is a mainMenu item: the box itself is the 40px control, so drop the pill chrome
     .nav-link:has(.lw-search-wrapper) {
+      // Prototype search is a fixed-width pill in the centred nav group.
+      flex: 0 0 $header-search-width;
+      width: $header-search-width;
       height: auto;
       padding: 0 !important;
+
+      .lw-search-wrapper {
+        width: 100%;
+      }
 
       &:hover,
       &:focus,
@@ -345,7 +601,7 @@ html.lw-scroll-locked body {
       box-sizing: border-box;
       gap: 8px;
       height: $header-item-height;
-      padding: 8px;
+      padding: 8px !important;
       border-radius: $nav-pill-border-radius;
       color: $nav-link-color;
     }
@@ -460,7 +716,7 @@ html.lw-scroll-locked body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  width: 233px;
+  width: $header-search-width;
   height: 40px;
   padding: 8px 12px;
   border-radius: 6px;
@@ -470,7 +726,7 @@ html.lw-scroll-locked body {
 
   &:focus-within {
     background: #fff;
-    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.16);
+    box-shadow: $header-focus-ring;
 
     .lw-search-icon {
       color: #059669;
@@ -524,6 +780,11 @@ html.lw-scroll-locked body {
   }
 }
 
+[data-paragon-theme-variant='dark'] #root header.site-header-desktop .container-fluid,
+body.indigo-dark-theme #root header.site-header-desktop .container-fluid {
+  max-width: none !important;
+  width: 100%;
+}
 
 .custom-header-container .nav {
   flex-wrap: nowrap;
@@ -531,7 +792,8 @@ html.lw-scroll-locked body {
 
 // Bell box for HeaderNotificationsSlot — 40px around the 24px icon, matches LMS
 // .secondary .lw-notification-btn. Drawer styles come from frontend-plugin-notifications.
-#root header.site-header-desktop .custom-header-container .lw-notification-btn {
+#root header.site-header-desktop .custom-header-container .lw-notification-btn,
+#root header.site-header-mobile .lw-notification-btn {
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;

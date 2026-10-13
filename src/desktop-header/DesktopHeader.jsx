@@ -40,7 +40,7 @@ const DesktopHeader = ({
   const renderSecondaryMenu = () => <DesktopSecondaryMenuSlot menu={secondaryMenu} />;
 
   const renderUserMenu = () => (
-    <Menu className="lw-user-menu" transitionClassName="menu-dropdown" transitionTimeout={250}>
+    <Menu className="lw-user-menu">
       <MenuTrigger
         tag="button"
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}

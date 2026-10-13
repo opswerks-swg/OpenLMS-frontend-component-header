@@ -26,7 +26,7 @@ const ICON_MAP = {
 const NavItem = ({ icon: IconComponent, label }) => (
   <>
     <IconComponent size={24} stroke={1.33} className="lw-nav-icon" aria-hidden="true" />
-    <span>{label}</span>
+    <span className="lw-nav-label" data-label={label}>{label}</span>
   </>
 );
 

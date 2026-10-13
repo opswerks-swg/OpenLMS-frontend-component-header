@@ -66,7 +66,7 @@ const LearningHeader = ({ showUserDropdown }) => {
               {showUserDropdown && authenticatedUser ? (
                 <>
                   {secondaryMenu && <DesktopSecondaryMenuSlot menu={secondaryMenu} />}
-                  <Menu transitionClassName="menu-dropdown" transitionTimeout={250}>
+                  <Menu>
                     <MenuTrigger
                       tag="button"
                       aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username: authenticatedUser.username })}

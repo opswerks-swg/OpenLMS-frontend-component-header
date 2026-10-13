@@ -57,11 +57,11 @@ const MobileHeader = ({
   return (
     <header
       aria-label={intl.formatMessage(messages['header.label.main.header'])}
-      className={`site-header-mobile d-flex justify-content-between align-items-center shadow ${stickyClassName}`}
+      className={`site-header-mobile d-flex justify-content-between align-items-center ${stickyClassName}`}
     >
       <a className="nav-skip sr-only sr-only-focusable" href="#main">{intl.formatMessage(messages['header.label.skip.nav'])}</a>
       {mainMenu.length > 0 ? (
-        <div className="w-100 d-flex justify-content-start">
+        <div className="lw-mobile-header-start d-flex justify-content-start">
 
           <Menu className="position-static">
             <MenuTrigger
@@ -75,18 +75,18 @@ const MobileHeader = ({
             <MenuContent
               tag="nav"
               aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-              className="nav flex-column pin-left pin-right border-top shadow py-2"
+              className="lw-mobile-menu-panel nav flex-column pin-left pin-right"
             >
               {renderMainMenu()}
             </MenuContent>
           </Menu>
         </div>
       ) : null}
-      <div className={`w-100 d-flex ${logoClasses}`}>
+      <div className={`lw-mobile-header-logo d-flex ${logoClasses}`}>
         <LogoSlot {...logoProps} itemType="http://schema.org/Organization" />
       </div>
       {showAccountColumn ? (
-        <div className="w-100 d-flex justify-content-end align-items-center">
+        <div className="lw-mobile-header-end d-flex justify-content-end align-items-center">
           {secondaryMenuNode}
           {loggedIn ? <HeaderNotificationsSlot /> : null}
           {(userMenu.length > 0 || loggedOutItems.length > 0) ? (
@@ -99,7 +99,7 @@ const MobileHeader = ({
               >
                 {renderUserMenuToggle()}
               </MenuTrigger>
-              <MenuContent tag="ul" className="nav flex-column pin-left pin-right border-top shadow py-2">
+              <MenuContent tag="ul" className="lw-mobile-menu-panel nav flex-column pin-left pin-right">
                 {loggedIn ? renderUserMenuItems() : renderLoggedOutItems()}
               </MenuContent>
             </Menu>

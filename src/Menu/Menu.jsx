@@ -276,7 +276,9 @@ Menu.defaultProps = {
   onOpen: null,
   respondToPointerEvents: false,
   closeOnDocumentClick: true,
-  transitionTimeout: 250,
+  // 0 matches the LMS header: the panel mounts and unmounts on the click.
+  // A 250ms exit holds the menu open, so a second click during that window does nothing.
+  transitionTimeout: 0,
   transitionClassName: 'menu-content',
 };
 

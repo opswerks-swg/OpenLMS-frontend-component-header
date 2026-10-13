@@ -59,7 +59,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
 exports[`<Header /> renders correctly for anonymous mobile 1`] = `
 <header
   aria-label="Main"
-  className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
+  className="site-header-mobile d-flex justify-content-between align-items-center sticky-top"
 >
   <a
     className="nav-skip sr-only sr-only-focusable"
@@ -68,7 +68,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
     Skip to main content
   </a>
   <div
-    className="w-100 d-flex justify-content-center"
+    className="lw-mobile-header-logo d-flex justify-content-center"
   >
     <a
       className="logo"
@@ -83,7 +83,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
     </a>
   </div>
   <div
-    className="w-100 d-flex justify-content-end align-items-center"
+    className="lw-mobile-header-end d-flex justify-content-end align-items-center"
   >
     <nav
       aria-label="Secondary"
@@ -252,7 +252,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
 exports[`<Header /> renders correctly for authenticated mobile 1`] = `
 <header
   aria-label="Main"
-  className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
+  className="site-header-mobile d-flex justify-content-between align-items-center sticky-top"
 >
   <a
     className="nav-skip sr-only sr-only-focusable"
@@ -261,7 +261,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
     Skip to main content
   </a>
   <div
-    className="w-100 d-flex justify-content-start"
+    className="lw-mobile-header-start d-flex justify-content-start"
   >
     <div
       className="menu position-static"
@@ -318,7 +318,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
     </div>
   </div>
   <div
-    className="w-100 d-flex justify-content-center"
+    className="lw-mobile-header-logo d-flex justify-content-center"
   >
     <a
       className="logo"
@@ -333,7 +333,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
     </a>
   </div>
   <div
-    className="w-100 d-flex justify-content-end align-items-center"
+    className="lw-mobile-header-end d-flex justify-content-end align-items-center"
   >
     <nav
       aria-label="Secondary"
