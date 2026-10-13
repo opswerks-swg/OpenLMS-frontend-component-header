@@ -1,3 +1,3 @@
-import { Menu, MenuTrigger, MenuContent } from './Menu.js';
+import { Menu, MenuTrigger, MenuContent } from './Menu';
 
 export { Menu, MenuTrigger, MenuContent };

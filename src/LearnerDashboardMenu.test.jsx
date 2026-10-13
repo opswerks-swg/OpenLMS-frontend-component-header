@@ -3,6 +3,7 @@ import { mergeConfig } from '@edx/frontend-platform';
 import { render, screen } from '@testing-library/react';
 
 import getLearnerHeaderMenu from './LearnerDashboardMenu';
+import hasActiveMenuItem from './utils/hasActiveMenuItem';
 
 const formatMessage = (message) => message.defaultMessage;
 const user = { username: 'edX' };
@@ -58,5 +59,31 @@ describe('getLearnerHeaderMenu', () => {
     const { secondaryMenu } = getLearnerHeaderMenu(formatMessage, null, user);
 
     expect(secondaryMenu).toEqual([]);
+  });
+
+  describe('profile item', () => {
+    beforeEach(() => {
+      mergeConfig({ ACCOUNT_PROFILE_URL: 'http://localhost/profile' });
+    });
+
+    afterEach(() => {
+      window.history.pushState({}, '', '/');
+    });
+
+    const profileItem = () => getLearnerHeaderMenu(formatMessage, null, user).userMenu[0].items[0];
+
+    it('is active on the user profile page', () => {
+      window.history.pushState({}, '', '/profile/u/edX');
+
+      expect(profileItem().isActive).toBe(true);
+      expect(hasActiveMenuItem(getLearnerHeaderMenu(formatMessage, null, user).userMenu)).toBe(true);
+    });
+
+    it('is not active on other pages', () => {
+      window.history.pushState({}, '', '/courses');
+
+      expect(profileItem().isActive).toBe(false);
+      expect(hasActiveMenuItem(getLearnerHeaderMenu(formatMessage, null, user).userMenu)).toBe(false);
+    });
   });
 });

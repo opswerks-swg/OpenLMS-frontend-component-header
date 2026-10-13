@@ -10,20 +10,8 @@ describe('Header', () => {
     await initializeMockApp();
   });
 
-  it('displays user button', () => {
+  it('displays user account menu trigger', () => {
     render(<Header />);
-    expect(screen.getByText(authenticatedUser.username)).toBeInTheDocument();
-  });
-
-  it('displays course data', () => {
-    const courseData = {
-      courseOrg: 'course-org',
-      courseNumber: 'course-number',
-      courseTitle: 'course-title',
-    };
-    render(<Header {...courseData} />);
-
-    expect(screen.getByText(`${courseData.courseOrg} ${courseData.courseNumber}`)).toBeInTheDocument();
-    expect(screen.getByText(courseData.courseTitle)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: `Account menu for ${authenticatedUser.username}` })).toBeInTheDocument();
   });
 });

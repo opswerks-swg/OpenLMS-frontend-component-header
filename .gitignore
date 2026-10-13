@@ -11,3 +11,7 @@ module.config.js
 .vscode
 src/i18n/messages
 env.config.jsx
+
+### Local Tutor dev (Personal-setup / dev.sh) — do not commit ###
+openlms-mfe-component-aliases.js
+*.bak.devsh

@@ -8,11 +8,8 @@ const HeaderNotificationsSlot = () => {
   const unlockRef = useRef(null);
 
   const handleDrawerOpenChange = useCallback((open) => {
-    if (open) {
-      if (!unlockRef.current) {
-        unlockRef.current = lockBodyScroll();
-      }
-      return;
+    if (open && !unlockRef.current) {
+      unlockRef.current = lockBodyScroll();
     }
   }, []);
 

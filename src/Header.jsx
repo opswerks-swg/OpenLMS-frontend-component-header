@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Responsive from 'react-responsive';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { AppContext } from '@edx/frontend-platform/react';
 import {
@@ -18,6 +17,10 @@ import messages from './Header.messages';
 import getLearnerHeaderMenu from './LearnerDashboardMenu';
 import RockfordSansFonts from './RockfordSansFonts';
 import GoogleSansFlexFonts from './GoogleSansFlexFonts';
+import useMinWidth from './utils/useMinWidth';
+
+// Desktop header from 1024px; tablets and phones get the compact (hamburger) header.
+const DESKTOP_MIN_WIDTH = 1024;
 
 ensureConfig([
   'LMS_BASE_URL',
@@ -53,6 +56,7 @@ const Header = ({
 }) => {
   const { authenticatedUser, config } = useContext(AppContext);
   const intl = useIntl();
+  const isDesktop = useMinWidth(DESKTOP_MIN_WIDTH);
 
   const courseSearchUrl = getConfig().SEARCH_CATALOG_URL || null;
   const learnerMenu = authenticatedUser === null ? null : getLearnerHeaderMenu(
@@ -95,12 +99,9 @@ const Header = ({
     <>
       <RockfordSansFonts />
       <GoogleSansFlexFonts />
-      <Responsive maxWidth={769}>
-        <MobileHeaderSlot props={props} />
-      </Responsive>
-      <Responsive minWidth={769}>
-        <DesktopHeaderSlot props={props} />
-      </Responsive>
+      {isDesktop
+        ? <DesktopHeaderSlot props={props} />
+        : <MobileHeaderSlot props={props} />}
     </>
   );
 };

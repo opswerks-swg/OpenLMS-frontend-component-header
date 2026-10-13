@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import { getConfig } from '@edx/frontend-platform';
+import { Container } from '@openedx/paragon';
 
-// Local Components
-import DesktopUserMenuToggleSlot
-  from '../plugin-slots/DesktopUserMenuToggleSlot';
-import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
+import DesktopUserMenuToggleSlot from '../plugin-slots/DesktopUserMenuToggleSlot';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
 import LogoSlot from '../plugin-slots/LogoSlot';
 import DesktopLoggedOutItemsSlot from '../plugin-slots/DesktopLoggedOutItemsSlot';
 import { desktopLoggedOutItemsDataShape } from './DesktopLoggedOutItems';
@@ -15,10 +13,8 @@ import { desktopHeaderMainOrSecondaryMenuDataShape } from './DesktopHeaderMainOr
 import DesktopSecondaryMenuSlot from '../plugin-slots/DesktopSecondaryMenuSlot';
 import DesktopUserMenuSlot from '../plugin-slots/DesktopUserMenuSlot';
 import { desktopUserMenuDataShape } from './DesktopHeaderUserMenu';
-
-// i18n
 import messages from '../Header.messages';
-import { Container } from '@openedx/paragon';
+import hasActiveMenuItem from '../utils/hasActiveMenuItem';
 
 // Assets
 
@@ -41,11 +37,11 @@ const DesktopHeader = ({
   const renderSecondaryMenu = () => <DesktopSecondaryMenuSlot menu={secondaryMenu} />;
 
   const renderUserMenu = () => (
-    <Menu className="lw-user-menu" transitionClassName="menu-dropdown" transitionTimeout={250}>
+    <Menu className="lw-user-menu">
       <MenuTrigger
         tag="button"
         aria-label={intl.formatMessage(messages['header.label.account.menu.for'], { username })}
-        className="lw-user-menu-toggle d-inline-flex align-items-center bg-transparent border-0"
+        className={`lw-user-menu-toggle d-inline-flex align-items-center bg-transparent border-0${hasActiveMenuItem(userMenu) ? ' active' : ''}`}
       >
         <DesktopUserMenuToggleSlot avatar={avatar} label={username} />
       </MenuTrigger>

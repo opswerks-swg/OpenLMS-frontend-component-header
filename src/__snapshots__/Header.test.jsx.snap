@@ -59,7 +59,7 @@ exports[`<Header /> renders correctly for anonymous desktop 1`] = `
 exports[`<Header /> renders correctly for anonymous mobile 1`] = `
 <header
   aria-label="Main"
-  className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
+  className="site-header-mobile d-flex justify-content-between align-items-center sticky-top"
 >
   <a
     className="nav-skip sr-only sr-only-focusable"
@@ -68,7 +68,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
     Skip to main content
   </a>
   <div
-    className="w-100 d-flex justify-content-center"
+    className="lw-mobile-header-logo d-flex justify-content-center"
   >
     <a
       className="logo"
@@ -83,7 +83,7 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
     </a>
   </div>
   <div
-    className="w-100 d-flex justify-content-end align-items-center"
+    className="lw-mobile-header-end d-flex justify-content-end align-items-center"
   >
     <nav
       aria-label="Secondary"
@@ -111,15 +111,10 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
         >
           <svg
             aria-hidden={true}
-            className="tabler-icon tabler-icon-user "
             fill="none"
             focusable="false"
-            height={24}
+            height="24px"
             role="img"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
             style={
               {
                 "height": "1.5rem",
@@ -127,14 +122,14 @@ exports[`<Header /> renders correctly for anonymous mobile 1`] = `
               }
             }
             viewBox="0 0 24 24"
-            width={24}
-            xmlns="http://www.w3.org/2000/svg"
+            width="24px"
           >
             <path
-              d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"
-            />
-            <path
-              d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+              d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.33"
             />
           </svg>
         </span>
@@ -184,13 +179,48 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
           >
             Courses
           </a>
+          <a
+            className="nav-link"
+            href="undefined/courses"
+            onClick={[Function]}
+          >
+            Discover New
+          </a>
         </nav>
         <nav
           aria-label="Secondary"
           className="nav secondary-menu-container align-items-center ml-auto"
         >
           <div
-            className="menu null"
+            className="lw-notification-btn-wrapper"
+          >
+            <button
+              aria-disabled="true"
+              aria-label="Notification bell icon"
+              className="lw-notification-btn"
+              data-testid="notification-bell-icon-static"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height={24}
+                viewBox="0 0 24 24"
+                width={24}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 17V18C9 18.7957 9.31607 19.5587 9.87868 20.1213C10.4413 20.6839 11.2044 21 12 21C12.7956 21 13.5587 20.6839 14.1213 20.1213C14.6839 19.5587 15 18.7957 15 18V17M10 5C10 4.46957 10.2107 3.96086 10.5858 3.58579C10.9609 3.21071 11.4696 3 12 3C12.5304 3 13.0391 3.21071 13.4142 3.58579C13.7893 3.96086 14 4.46957 14 5C15.1484 5.54303 16.1274 6.38833 16.8321 7.4453C17.5367 8.50227 17.9404 9.73107 18 11V14C18.0753 14.6217 18.2954 15.2171 18.6428 15.7381C18.9902 16.2592 19.4551 16.6914 20 17H4C4.54494 16.6914 5.00981 16.2592 5.35719 15.7381C5.70457 15.2171 5.92474 14.6217 6 14V11C6.05956 9.73107 6.4633 8.50227 7.16795 7.4453C7.8726 6.38833 8.85159 5.54303 10 5Z"
+                  stroke="#1E293B"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.33"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            className="menu lw-user-menu"
             onKeyDown={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
@@ -199,44 +229,40 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="Account menu for edX"
-              className="menu-trigger d-inline-flex align-items-center bg-transparent border-0 p-0"
+              className="menu-trigger lw-user-menu-toggle d-inline-flex align-items-center bg-transparent border-0"
               onClick={[Function]}
             >
               <span
+                aria-label="edX"
                 className="avatar overflow-hidden d-inline-flex rounded-circle null"
                 style={
                   {
-                    "height": "1.5em",
-                    "width": "1.5em",
+                    "height": "24px",
+                    "width": "24px",
                   }
                 }
               >
                 <svg
                   aria-hidden={true}
-                  className="tabler-icon tabler-icon-user "
                   fill="none"
                   focusable="false"
-                  height={24}
+                  height="24px"
                   role="img"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
                   style={
                     {
-                      "height": "1.5em",
-                      "width": "1.5em",
+                      "height": "24px",
+                      "width": "24px",
                     }
                   }
                   viewBox="0 0 24 24"
-                  width={24}
-                  xmlns="http://www.w3.org/2000/svg"
+                  width="24px"
                 >
                   <path
-                    d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"
-                  />
-                  <path
-                    d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+                    d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.33"
                   />
                 </svg>
               </span>
@@ -252,7 +278,7 @@ exports[`<Header /> renders correctly for authenticated desktop 1`] = `
 exports[`<Header /> renders correctly for authenticated mobile 1`] = `
 <header
   aria-label="Main"
-  className="site-header-mobile d-flex justify-content-between align-items-center shadow sticky-top"
+  className="site-header-mobile d-flex justify-content-between align-items-center sticky-top"
 >
   <a
     className="nav-skip sr-only sr-only-focusable"
@@ -261,7 +287,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
     Skip to main content
   </a>
   <div
-    className="w-100 d-flex justify-content-start"
+    className="lw-mobile-header-start d-flex justify-content-start"
   >
     <div
       className="menu position-static"
@@ -318,7 +344,7 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
     </div>
   </div>
   <div
-    className="w-100 d-flex justify-content-center"
+    className="lw-mobile-header-logo d-flex justify-content-center"
   >
     <a
       className="logo"
@@ -333,8 +359,36 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
     </a>
   </div>
   <div
-    className="w-100 d-flex justify-content-end align-items-center"
+    className="lw-mobile-header-end d-flex justify-content-end align-items-center"
   >
+    <div
+      className="lw-notification-btn-wrapper"
+    >
+      <button
+        aria-disabled="true"
+        aria-label="Notification bell icon"
+        className="lw-notification-btn"
+        data-testid="notification-bell-icon-static"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height={24}
+          viewBox="0 0 24 24"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 17V18C9 18.7957 9.31607 19.5587 9.87868 20.1213C10.4413 20.6839 11.2044 21 12 21C12.7956 21 13.5587 20.6839 14.1213 20.1213C14.6839 19.5587 15 18.7957 15 18V17M10 5C10 4.46957 10.2107 3.96086 10.5858 3.58579C10.9609 3.21071 11.4696 3 12 3C12.5304 3 13.0391 3.21071 13.4142 3.58579C13.7893 3.96086 14 4.46957 14 5C15.1484 5.54303 16.1274 6.38833 16.8321 7.4453C17.5367 8.50227 17.9404 9.73107 18 11V14C18.0753 14.6217 18.2954 15.2171 18.6428 15.7381C18.9902 16.2592 19.4551 16.6914 20 17H4C4.54494 16.6914 5.00981 16.2592 5.35719 15.7381C5.70457 15.2171 5.92474 14.6217 6 14V11C6.05956 9.73107 6.4633 8.50227 7.16795 7.4453C7.8726 6.38833 8.85159 5.54303 10 5Z"
+            stroke="#1E293B"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.33"
+          />
+        </svg>
+      </button>
+    </div>
     <nav
       aria-label="Secondary"
       className="menu position-static"
@@ -361,15 +415,10 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
         >
           <svg
             aria-hidden={true}
-            className="tabler-icon tabler-icon-user "
             fill="none"
             focusable="false"
-            height={24}
+            height="24px"
             role="img"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
             style={
               {
                 "height": "1.5rem",
@@ -377,14 +426,14 @@ exports[`<Header /> renders correctly for authenticated mobile 1`] = `
               }
             }
             viewBox="0 0 24 24"
-            width={24}
-            xmlns="http://www.w3.org/2000/svg"
+            width="24px"
           >
             <path
-              d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"
-            />
-            <path
-              d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+              d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21M8 7C8 8.06087 8.42143 9.07828 9.17157 9.82843C9.92172 10.5786 10.9391 11 12 11C13.0609 11 14.0783 10.5786 14.8284 9.82843C15.5786 9.07828 16 8.06087 16 7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7Z"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.33"
             />
           </svg>
         </span>

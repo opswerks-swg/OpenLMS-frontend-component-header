@@ -4,9 +4,11 @@ import { render, screen } from '@testing-library/react';
 import HeaderNotificationsSlot from './index';
 import { lockBodyScroll } from '../../utils/bodyScrollLock';
 
+/* eslint-disable react/prop-types */
 jest.mock('@openedx/frontend-plugin-framework', () => ({
   PluginSlot: ({ children }) => <div data-testid="plugin-slot">{children}</div>,
 }));
+/* eslint-enable react/prop-types */
 
 jest.mock('@edx/frontend-plugin-notifications', () => ({
   __esModule: true,

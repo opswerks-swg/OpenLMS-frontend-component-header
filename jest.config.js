@@ -4,4 +4,5 @@ module.exports = createConfig('jest', {
   setupFilesAfterEnv: [
     '<rootDir>/src/setupTest.js',
   ],
+  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/dist/'],
 });

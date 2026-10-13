@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { IconChevronDown } from '@tabler/icons-react';
 
-import { Menu, MenuTrigger, MenuContent } from '../Menu/index.js';
+import { Menu, MenuTrigger, MenuContent } from '../Menu';
 
 const MobileHeaderMainMenu = ({ menu }) => {
   // Nodes are accepted as a prop
@@ -15,6 +16,7 @@ const MobileHeaderMainMenu = ({ menu }) => {
       href,
       content,
       submenuContent,
+      className,
       disabled,
       isActive,
       onClick,
@@ -34,11 +36,12 @@ const MobileHeaderMainMenu = ({ menu }) => {
     }
 
     return (
-      <Menu key={`${type}-${href ?? index}`} tag="div" className="nav-item">
+      <Menu key={`${type}-${href ?? index}`} tag="div" className={`nav-item${className ? ` ${className}` : ''}`}>
         <MenuTrigger onClick={onClick || null} tag="button" type="button" className="nav-link bg-transparent border-0 text-left w-100">
           {content}
+          <IconChevronDown size={16} stroke={2} className="lw-nav-chevron" aria-hidden="true" focusable="false" />
         </MenuTrigger>
-        <MenuContent className="position-static pin-left pin-right py-2">
+        <MenuContent className="lw-mobile-submenu position-static">
           {submenuContent}
         </MenuContent>
       </Menu>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   IconHome,
   IconBook,
@@ -26,9 +27,14 @@ const ICON_MAP = {
 const NavItem = ({ icon: IconComponent, label }) => (
   <>
     <IconComponent size={24} stroke={1.33} className="lw-nav-icon" aria-hidden="true" />
-    <span>{label}</span>
+    <span className="lw-nav-label" data-label={label}>{label}</span>
   </>
 );
+
+NavItem.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  label: PropTypes.string.isRequired,
+};
 
 const getLearnerHeaderMenu = (
   formatMessage,
@@ -160,6 +166,8 @@ const getLearnerHeaderMenu = (
     submenuContent: toSubmenu(configHelpLinks),
   }] : [];
 
+  const profileUrl = `${getConfig().ACCOUNT_PROFILE_URL}/u/${authenticatedUser?.username}`;
+
   return {
     mainMenu: [...mainMenu, ...searchItem],
     secondaryMenu: helpMenu,
@@ -169,8 +177,10 @@ const getLearnerHeaderMenu = (
         items: [
           {
             type: 'item',
-            href: `${getConfig().ACCOUNT_PROFILE_URL}/u/${authenticatedUser?.username}`,
+            href: profileUrl,
             content: formatMessage(messages['header.user.menu.profile']),
+            // The profile MFE has no APP_ID, so match on its path.
+            isActive: isLinkActive({ url: profileUrl }),
           },
           {
             type: 'item',
