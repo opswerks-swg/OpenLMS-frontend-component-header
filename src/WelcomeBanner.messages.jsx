@@ -3,7 +3,7 @@ import { defineMessages } from '@edx/frontend-platform/i18n';
 const messages = defineMessages({
   'header.welcomeBanner.greeting': {
     id: 'header.welcomeBanner.greeting',
-    defaultMessage: 'Welcome back, {username}!',
+    defaultMessage: 'Welcome back, {name}!',
     description: 'Greeting shown to a logged in member below the header',
   },
   'header.welcomeBanner.subtitle': {
@@ -13,7 +13,7 @@ const messages = defineMessages({
   },
   'header.welcomeBanner.avatarAlt': {
     id: 'header.welcomeBanner.avatarAlt',
-    defaultMessage: '{username}\'s avatar',
+    defaultMessage: '{name}\'s avatar',
     description: 'Alt text for the member avatar image in the welcome banner',
   },
 });
