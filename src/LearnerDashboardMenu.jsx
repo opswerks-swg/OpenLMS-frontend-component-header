@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   IconHome,
@@ -21,6 +21,57 @@ const ICON_MAP = {
   ClockHour3: IconClockHour3,
   Search: IconSearch,
   HelpHexagon: IconHelpHexagon,
+};
+
+// PRD LMS 6.1: pressing "/" focuses the search bar from any page.
+const SEARCH_SHORTCUT_KEY = '/';
+
+const isTypingTarget = (element) => (
+  element instanceof HTMLElement
+  && (element.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName))
+);
+
+export const SearchInput = ({ label, catalogUrl, toLmsUrl }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key !== SEARCH_SHORTCUT_KEY || event.ctrlKey || event.metaKey || event.altKey) {
+        return;
+      }
+      // Don't steal the key from someone who is typing a "/" somewhere else.
+      if (isTypingTarget(event.target)) {
+        return;
+      }
+      event.preventDefault();
+      inputRef.current?.focus();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  return (
+    <input
+      ref={inputRef}
+      className="lw-search-input"
+      type="search"
+      aria-label={label}
+      placeholder={label}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          const q = e.target.value.trim();
+          window.location.href = toLmsUrl(catalogUrl)
+            + (q ? `?q=${encodeURIComponent(q)}` : '');
+        }
+      }}
+    />
+  );
+};
+
+SearchInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  catalogUrl: PropTypes.string.isRequired,
+  toLmsUrl: PropTypes.func.isRequired,
 };
 
 // Icon + label rendered as direct children of .nav-link (matches LMS .lw-nav-item)
@@ -135,18 +186,10 @@ const getLearnerHeaderMenu = (
     content: (
       <div className="lw-search-wrapper">
         <IconSearch size={24} stroke={1.33} className="lw-search-icon" aria-hidden="true" />
-        <input
-          className="lw-search-input"
-          type="search"
-          aria-label={formatMessage(messages['header.search.placeholder'])}
-          placeholder={formatMessage(messages['header.search.placeholder'])}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              const q = e.target.value.trim();
-              window.location.href = toLmsUrl(searchCatalogUrl)
-                + (q ? `?q=${encodeURIComponent(q)}` : '');
-            }
-          }}
+        <SearchInput
+          label={formatMessage(messages['header.search.placeholder'])}
+          catalogUrl={searchCatalogUrl}
+          toLmsUrl={toLmsUrl}
         />
       </div>
     ),
