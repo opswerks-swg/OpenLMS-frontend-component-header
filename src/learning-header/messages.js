@@ -23,8 +23,8 @@ const messages = defineMessages({
   },
   orderHistory: {
     id: 'header.menu.orderHistory.label',
-    defaultMessage: 'Order History',
-    description: 'The text for the user menu Order History navigation link.',
+    defaultMessage: 'My History',
+    description: 'The text for the user menu learning history navigation link.',
   },
   skipNavLink: {
     id: 'header.navigation.skipNavLink',
