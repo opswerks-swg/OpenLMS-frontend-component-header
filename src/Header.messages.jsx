@@ -38,8 +38,8 @@ const messages = defineMessages({
   },
   'header.user.menu.order.history': {
     id: 'header.user.menu.order.history',
-    defaultMessage: 'Order History',
-    description: 'Link to order history',
+    defaultMessage: 'My History',
+    description: 'Link to learning history',
   },
   'header.user.menu.logout': {
     id: 'header.user.menu.logout',
