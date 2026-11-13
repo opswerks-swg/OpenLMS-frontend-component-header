@@ -23,10 +23,19 @@ const MobileHeaderMainMenu = ({ menu }) => {
     } = menuItem;
 
     if (type === 'item') {
+      const itemClassName = `nav-link${disabled ? ' disabled' : ''}${isActive ? ' active' : ''}`;
+      // Search has no href. An <a> around the input is invalid and drops focus.
+      if (!href) {
+        return (
+          <div key={`${type}-${index}`} className={itemClassName}>
+            {content}
+          </div>
+        );
+      }
       return (
         <a
-          key={`${type}-${href ?? index}`}
-          className={`nav-link${disabled ? ' disabled' : ''}${isActive ? ' active' : ''}`}
+          key={`${type}-${href}`}
+          className={itemClassName}
           href={href}
           onClick={onClick || null}
         >

@@ -11,29 +11,46 @@ const renderSearchInput = (extra = null) => render(
   </>,
 );
 
-describe('SearchInput "/" shortcut', () => {
-  it('focuses the search box when "/" is pressed outside a text field', () => {
+describe('SearchInput Alt+/ shortcut', () => {
+  it('focuses the search box when Alt+/ is pressed outside a text field', () => {
     renderSearchInput();
 
-    fireEvent.keyDown(document.body, { key: '/' });
+    fireEvent.keyDown(document.body, { key: '/', code: 'Slash', altKey: true });
 
     expect(screen.getByRole('searchbox', { name: 'Search courses' })).toHaveFocus();
   });
 
-  it('does not take over "/" typed into another text field', () => {
+  it('focuses the search box when macOS reports Option+/ as "÷"', () => {
+    renderSearchInput();
+
+    fireEvent.keyDown(document.body, { key: '÷', code: 'Slash', altKey: true });
+
+    expect(screen.getByRole('searchbox', { name: 'Search courses' })).toHaveFocus();
+  });
+
+  it('does not focus the search box for a bare "/"', () => {
+    renderSearchInput();
+
+    fireEvent.keyDown(document.body, { key: '/', code: 'Slash' });
+
+    expect(screen.getByRole('searchbox', { name: 'Search courses' })).not.toHaveFocus();
+  });
+
+  it('moves focus from another text field on Alt+/', () => {
     renderSearchInput(<input aria-label="Other field" />);
     const other = screen.getByRole('textbox', { name: 'Other field' });
     other.focus();
 
-    fireEvent.keyDown(other, { key: '/' });
+    fireEvent.keyDown(other, { key: '÷', code: 'Slash', altKey: true });
 
-    expect(other).toHaveFocus();
+    expect(screen.getByRole('searchbox', { name: 'Search courses' })).toHaveFocus();
   });
 
-  it('ignores "/" pressed with a modifier key', () => {
+  it('ignores "/" pressed with Ctrl or Meta as well as Alt', () => {
     renderSearchInput();
 
-    fireEvent.keyDown(document.body, { key: '/', ctrlKey: true });
+    fireEvent.keyDown(document.body, { key: '/', code: 'Slash', altKey: true, ctrlKey: true });
+    fireEvent.keyDown(document.body, { key: '/', code: 'Slash', altKey: true, metaKey: true });
 
     expect(screen.getByRole('searchbox', { name: 'Search courses' })).not.toHaveFocus();
   });

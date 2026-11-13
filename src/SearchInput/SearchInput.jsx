@@ -1,31 +1,34 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-// PRD LMS 6.1: pressing "/" focuses the search bar from any page.
-const SEARCH_SHORTCUT_KEY = '/';
-
-const isTypingTarget = (element) => (
-  element instanceof HTMLElement
-  && (element.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName))
-);
+// PRD LMS 6.1: Alt+/ (Option+/ on macOS) focuses the search bar from any page.
+// event.code, not event.key: macOS reports Option+/ as "÷".
+const isAltSlash = (event) => {
+  const alt = event.altKey || event.getModifierState?.('Alt');
+  if (!alt || event.ctrlKey || event.metaKey || event.shiftKey) {
+    return false;
+  }
+  return event.code === 'Slash' || event.key === '/' || event.key === '÷';
+};
 
 const SearchInput = ({ label, catalogUrl, toLmsUrl }) => {
   const inputRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key !== SEARCH_SHORTCUT_KEY || event.ctrlKey || event.metaKey || event.altKey) {
+      if (!isAltSlash(event)) {
         return;
       }
-      // Don't steal the key from someone who is typing a "/" somewhere else.
-      if (isTypingTarget(event.target)) {
+      const input = inputRef.current;
+      if (!input) {
         return;
       }
+      // Modifier chord, so it still moves focus when another field is active.
       event.preventDefault();
-      inputRef.current?.focus();
+      input.focus();
     };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown, true);
+    return () => document.removeEventListener('keydown', handleKeyDown, true);
   }, []);
 
   return (
