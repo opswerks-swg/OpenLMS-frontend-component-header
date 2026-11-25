@@ -15,8 +15,6 @@ import MobileHeaderSlot from './plugin-slots/MobileHeaderSlot';
 
 import messages from './Header.messages';
 import getLearnerHeaderMenu from './LearnerDashboardMenu';
-import RockfordSansFonts from './RockfordSansFonts';
-import GoogleSansFlexFonts from './GoogleSansFlexFonts';
 import useMinWidth from './utils/useMinWidth';
 
 // Desktop header from 1024px; tablets and phones get the compact (hamburger) header.
@@ -95,15 +93,9 @@ const Header = ({
     loggedOutItems: getConfig().AUTHN_MINIMAL_HEADER ? [] : loggedOutItems,
   };
 
-  return (
-    <>
-      <RockfordSansFonts />
-      <GoogleSansFlexFonts />
-      {isDesktop
-        ? <DesktopHeaderSlot props={props} />
-        : <MobileHeaderSlot props={props} />}
-    </>
-  );
+  return isDesktop
+    ? <DesktopHeaderSlot props={props} />
+    : <MobileHeaderSlot props={props} />;
 };
 
 Header.defaultProps = {
