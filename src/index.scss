@@ -15,7 +15,7 @@ $nav-pill-hover-bg: $nav-pill-active-bg;
 $nav-pill-hover-color: $nav-pill-active-color;
 $nav-pill-border-radius: 6px;
 $nav-link-color: #1E293B;
-$header-font-family: 'Google Sans Flex', sans-serif;
+$header-font-family: var(--pgn-typography-font-family-base); // Google Sans Flex, from the theme's typography tokens
 $header-height: 65px;
 $header-item-height: 40px;
 $profile-icon-color: #1E293B !default;
@@ -28,8 +28,8 @@ $header-phone-max: 575.98px;
 @import './studio-header/StudioHeader.scss';
 @import './WelcomeBanner.scss';
 
-// Whole header (nav pills, search, menus) uses Google Sans Flex, loaded by GoogleSansFlexFonts.
-// !important + every descendant: brand/LMS globals set Rockford on buttons and inputs.
+// Whole header (nav pills, search, menus) uses the theme font token (Google Sans Flex).
+// !important + every descendant: brand/LMS globals can set other fonts on buttons and inputs.
 #root header.site-header-desktop,
 #root header.site-header-mobile {
   // LMS pages render antialiased; without this the same colours (e.g. the search
