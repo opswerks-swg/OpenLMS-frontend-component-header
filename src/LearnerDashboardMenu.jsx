@@ -12,6 +12,7 @@ import { getConfig } from '@edx/frontend-platform';
 
 import messages from './Header.messages';
 import { HelpIcon } from './Icons';
+import SearchInput from './SearchInput/SearchInput';
 
 // Icon map — allows HEADER_NAV_LINKS to reference icons by string name
 const ICON_MAP = {
@@ -135,18 +136,10 @@ const getLearnerHeaderMenu = (
     content: (
       <div className="lw-search-wrapper">
         <IconSearch size={24} stroke={1.33} className="lw-search-icon" aria-hidden="true" />
-        <input
-          className="lw-search-input"
-          type="search"
-          aria-label={formatMessage(messages['header.search.placeholder'])}
-          placeholder={formatMessage(messages['header.search.placeholder'])}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              const q = e.target.value.trim();
-              window.location.href = toLmsUrl(searchCatalogUrl)
-                + (q ? `?q=${encodeURIComponent(q)}` : '');
-            }
-          }}
+        <SearchInput
+          label={formatMessage(messages['header.search.placeholder'])}
+          catalogUrl={searchCatalogUrl}
+          toLmsUrl={toLmsUrl}
         />
       </div>
     ),
